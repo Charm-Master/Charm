@@ -435,105 +435,105 @@
                 <option value="green-mode">Green</option>
             </select>
 
-        <!-- Account Management -->
-        <h2>Account Management</h2>
-        <p>Create or manage your accounts:</p>
-        <input type="text" id="username-input" placeholder="Username">
-        <input type="password" id="password-input" placeholder="Password">
-        <button id="create-account-btn">Create Account</button>
-        <button id="login-btn">Login</button>
-        <button id="logout-btn" style="display:none;">Logout</button>
-        <p id="account-status"></p>
+            <!-- Account Management -->
+            <h2>Account Management</h2>
+            <p>Create or manage your accounts:</p>
+            <input type="text" id="username-input" placeholder="Username">
+            <input type="password" id="password-input" placeholder="Password">
+            <button id="create-account-btn">Create Account</button>
+            <button id="login-btn">Login</button>
+            <button id="logout-btn" style="display:none;">Logout</button>
+            <p id="account-status"></p>
 
-        <h2>Account List</h2>
-        <ul id="account-list"></ul>
-    </section>
+            <h2>Account List</h2>
+            <ul id="account-list"></ul>
+        </section>
 
-    <script>
-        // Get the settings elements
-        const themeSelect = document.getElementById('theme-select');
-        const usernameInput = document.getElementById('username-input');
-        const passwordInput = document.getElementById('password-input');
-        const createAccountBtn = document.getElementById('create-account-btn');
-        const loginBtn = document.getElementById('login-btn');
-        const logoutBtn = document.getElementById('logout-btn');
-        const accountStatus = document.getElementById('account-status');
-        const accountList = document.getElementById('account-list');
+        <script>
+            // Get the settings elements
+            const themeSelect = document.getElementById('theme-select');
+            const usernameInput = document.getElementById('username-input');
+            const passwordInput = document.getElementById('password-input');
+            const createAccountBtn = document.getElementById('create-account-btn');
+            const loginBtn = document.getElementById('login-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const accountStatus = document.getElementById('account-status');
+            const accountList = document.getElementById('account-list');
 
-        // Function to apply the theme
-        function applyTheme(theme) {
-            document.body.classList.remove('light-mode', 'dark-mode', 'blue-mode', 'green-mode');
-            document.body.classList.add(theme);
-        }
-
-        // Function to create an account
-        function createAccount(username, password) {
-            const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
-            const existingAccount = accounts.find(account => account.username === username);
-            if (existingAccount) {
-                alert('Account already exists!');
-                return;
+            // Function to apply the theme
+            function applyTheme(theme) {
+                document.body.classList.remove('light-mode', 'dark-mode', 'blue-mode', 'green-mode');
+                document.body.classList.add(theme);
             }
-            accounts.push({ username, password });
-            localStorage.setItem('accounts', JSON.stringify(accounts));
+
+            // Function to create an account
+            function createAccount(username, password) {
+                const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
+                const existingAccount = accounts.find(account => account.username === username);
+                if (existingAccount) {
+                    alert('Account already exists!');
+                    return;
+                }
+                accounts.push({ username, password });
+                localStorage.setItem('accounts', JSON.stringify(accounts));
+                updateAccountList();
+                alert('Account created successfully!');
+            }
+
+            // Function to login
+            function login(username, password) {
+                const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
+                const account = accounts.find(account => account.username === username && account.password === password);
+                if (!account) {
+                    alert('Invalid username or password!');
+                    return;
+                }
+                localStorage.setItem('currentAccount', JSON.stringify(account));
+                updateAccountStatus();
+                alert('Logged in successfully!');
+            }
+
+            // Function to logout
+            function logout() {
+                localStorage.removeItem('currentAccount');
+                updateAccountStatus();
+                alert('Logged out successfully!');
+            }
+
+            // Function to update the account list
+            function updateAccountList() {
+                const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
+                accountList.innerHTML = '';
+                accounts.forEach(account => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = account.username;
+                    accountList.appendChild(listItem);
+                });
+            }
+
+            // Function to update the account status
+            function updateAccountStatus() {
+                const currentAccount = localStorage.getItem('currentAccount') ? JSON.parse(localStorage.getItem('currentAccount')) : null;
+                if (currentAccount) {
+                    accountStatus.textContent = `Logged in as ${currentAccount.username}`;
+                    logoutBtn.style.display = 'block';
+                    loginBtn.style.display = 'none';
+                } else {
+                    accountStatus.textContent = 'Not logged in';
+                    logoutBtn.style.display = 'none';
+                    loginBtn.style.display = 'block';
+                }
+            }
+
+            // Add event listeners to the settings elements
+            themeSelect.addEventListener('change', () => applyTheme(themeSelect.value));
+            createAccountBtn.addEventListener('click', () => createAccount(usernameInput.value, passwordInput.value));
+            loginBtn.addEventListener('click', () => login(usernameInput.value, passwordInput.value));
+            logoutBtn.addEventListener('click', logout);
+
+            // Update the account list and status on page load
             updateAccountList();
-            alert('Account created successfully!');
-        }
-
-        // Function to login
-        function login(username, password) {
-            const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
-            const account = accounts.find(account => account.username === username && account.password === password);
-            if (!account) {
-                alert('Invalid username or password!');
-                return;
-            }
-            localStorage.setItem('currentAccount', JSON.stringify(account));
             updateAccountStatus();
-            alert('Logged in successfully!');
-        }
-
-        // Function to logout
-        function logout() {
-            localStorage.removeItem('currentAccount');
-            updateAccountStatus();
-            alert('Logged out successfully!');
-        }
-
-        // Function to update the account list
-        function updateAccountList() {
-            const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
-            accountList.innerHTML = '';
-            accounts.forEach(account => {
-                const listItem = document.createElement('li');
-                listItem.textContent = account.username;
-                accountList.appendChild(listItem);
-            });
-        }
-
-        // Function to update the account status
-        function updateAccountStatus() {
-            const currentAccount = localStorage.getItem('currentAccount') ? JSON.parse(localStorage.getItem('currentAccount')) : null;
-            if (currentAccount) {
-                accountStatus.textContent = `Logged in as ${currentAccount.username}`;
-                logoutBtn.style.display = 'block';
-                loginBtn.style.display = 'none';
-            } else {
-                accountStatus.textContent = 'Not logged in';
-                logoutBtn.style.display = 'none';
-                loginBtn.style.display = 'block';
-            }
-        }
-
-        // Add event listeners to the settings elements
-        themeSelect.addEventListener('change', () => applyTheme(themeSelect.value));
-        createAccountBtn.addEventListener('click', () => createAccount(usernameInput.value, passwordInput.value));
-        loginBtn.addEventListener('click', () => login(usernameInput.value, passwordInput.value));
-        logoutBtn.addEventListener('click', logout);
-
-        // Update the account list and status on page load
-        updateAccountList();
-        updateAccountStatus();
     </script>
 
     <style>
