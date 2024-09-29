@@ -422,6 +422,85 @@
         <section id="about" style="display:none;">
             <h2>About This Repository</h2>
             <p>This repository is a curated collection of Python and HTML projects designed to help learners explore various programming concepts. Whether you're a beginner or an experienced developer, you'll find projects that cater to your skill level and interests.</p>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Your Website Title</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f0f0f0;
+                        color: #333;
+                        padding: 20px;
+                    }
+            
+                    section {
+                        background: white;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                        margin-bottom: 20px;
+                    }
+            
+                    h2 {
+                        margin-bottom: 10px;
+                    }
+            
+                    .animated-button {
+                        display: inline-block;
+                        padding: 15px 30px;
+                        font-size: 20px;
+                        color: white;
+                        background: linear-gradient(45deg, #ff6ec4, #7873f5);
+                        border: none;
+                        border-radius: 50px;
+                        text-decoration: none;
+                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                        transition: all 0.4s ease;
+                        position: relative;
+                        overflow: hidden;
+                    }
+            
+                    .animated-button:hover {
+                        transform: scale(1.1);
+                        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+                    }
+            
+                    .animated-button::before {
+                        content: '';
+                        position: absolute;
+                        width: 300%;
+                        height: 300%;
+                        background: rgba(255, 255, 255, 0.2);
+                        top: -100%;
+                        left: -100%;
+                        transition: all 0.6s ease;
+                        border-radius: 50%;
+                        z-index: 0;
+                    }
+            
+                    .animated-button:hover::before {
+                        top: 0;
+                        left: 0;
+                    }
+            
+                    .animated-button span {
+                        position: relative;
+                        z-index: 1;
+                    }
+                </style>
+            </head>
+            <body>
+                <section id="about">
+                    <h2>About This Project</h2>
+                    <p>This project is designed to help users manage their coding projects efficiently.</p>
+                    <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank">Join Our Discord</a>
+                </section>
+            </body>
+            </html>
+            
         </section>
 
         <!-- Settings Section -->
