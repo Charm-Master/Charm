@@ -418,151 +418,151 @@
             </div>
         </section>
 
-<!-- About Section with Animated Background -->
-<section id="about" class="animated-section">
-    <div class="content">
-        <h2>About This Project</h2>
-        <p>
-            This project is designed to help users manage their coding projects efficiently. It includes a variety of Python and HTML projects that cater to different skill levels, providing hands-on experience and practical knowledge.
-        </p>
-        <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank">
-            <span>Join Our Discord</span>
-        </a>
-    </div>
-
-    <!-- Embedded CSS for Animated Background and Section Styling -->
-    <style>
-        /* ===========================
-           Animated Section Styles
-        =========================== */
-        .animated-section {
-            position: relative;
-            overflow: hidden;
-            padding: 60px 20px;
-            color: white;
-            text-align: center;
-            /* Initial hidden state */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-            /* Animated gradient background */
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        /* Visible state triggers fade-in and slide-up */
-        .animated-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Keyframes for Gradient Animation */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Content Container Styling */
-        .animated-section .content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            border-radius: 8px;
-        }
-
-        /* Heading Styling */
-        .animated-section h2 {
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-
-        /* Paragraph Styling */
-        .animated-section p {
-            line-height: 1.6;
-            font-size: 1.2em;
-        }
-
-        /* ===========================
-           Animated Button Styles
-        =========================== */
-        .animated-button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 20px;
-            color: white;
-            background: linear-gradient(45deg, #ff6ec4, #7873f5);
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .animated-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .animated-button::before {
-            content: '';
-            position: absolute;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.2);
-            top: -100%;
-            left: -100%;
-            transition: all 0.6s ease;
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .animated-button:hover::before {
-            top: 0;
-            left: 0;
-        }
-
-        .animated-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ===========================
-           Responsive Adjustments
-        =========================== */
-        @media (max-width: 600px) {
-            .animated-button {
-                width: 100%;
-                text-align: center;
-            }
-
-            .animated-section h2 {
-                font-size: 2em;
-            }
-
-            .animated-section p {
-                font-size: 1em;
-            }
-        }
-    </style>
-
-    <!-- Embedded JavaScript to Trigger Animation on Page Load -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const aboutSection = document.getElementById('about');
-            // Add the 'visible' class to trigger the fade-in and slide-up animation
-            setTimeout(() => {
-                aboutSection.classList.add('visible');
-            }, 100); // Delay to ensure smooth animation
-        });
-    </script>
-</section>
+	<!-- About Section with Animated Background -->
+	<section id="about" class="animated-section">
+	    <div class="content">
+	        <h2>About This Project</h2>
+	        <p>
+	            This project is designed to help users manage their coding projects efficiently. It includes a variety of Python and HTML projects that cater to different skill levels, providing hands-on experience and practical knowledge.
+	        </p>
+	        <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank">
+	            <span>Join Our Discord</span>
+	        </a>
+	    </div>
+	
+	    <!-- Embedded CSS for Animated Background and Section Styling -->
+	    <style>
+	        /* ===========================
+	           Animated Section Styles
+	        =========================== */
+	        .animated-section {
+	            position: relative;
+	            overflow: hidden;
+	            padding: 60px 20px;
+	            color: white;
+	            text-align: center;
+	            /* Initial hidden state */
+	            opacity: 0;
+	            transform: translateY(20px);
+	            transition: opacity 1s ease-out, transform 1s ease-out;
+	            /* Animated gradient background */
+	            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	            background-size: 400% 400%;
+	            animation: gradientBG 15s ease infinite;
+	        }
+	
+	        /* Visible state triggers fade-in and slide-up */
+	        .animated-section.visible {
+	            opacity: 1;
+	            transform: translateY(0);
+	        }
+	
+	        /* Keyframes for Gradient Animation */
+	        @keyframes gradientBG {
+	            0% { background-position: 0% 50%; }
+	            50% { background-position: 100% 50%; }
+	            100% { background-position: 0% 50%; }
+	        }
+	
+	        /* Content Container Styling */
+	        .animated-section .content {
+	            max-width: 800px;
+	            margin: 0 auto;
+	            padding: 20px;
+	            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	            border-radius: 8px;
+	        }
+	
+	        /* Heading Styling */
+	        .animated-section h2 {
+	            margin-bottom: 20px;
+	            font-size: 2.5em;
+	        }
+	
+	        /* Paragraph Styling */
+	        .animated-section p {
+	            line-height: 1.6;
+	            font-size: 1.2em;
+	        }
+	
+	        /* ===========================
+	           Animated Button Styles
+	        =========================== */
+	        .animated-button {
+	            display: inline-block;
+	            padding: 15px 30px;
+	            font-size: 20px;
+	            color: white;
+	            background: linear-gradient(45deg, #ff6ec4, #7873f5);
+	            border: none;
+	            border-radius: 50px;
+	            text-decoration: none;
+	            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+	            transition: all 0.4s ease;
+	            position: relative;
+	            overflow: hidden;
+	            cursor: pointer;
+	            margin-top: 20px;
+	        }
+	
+	        .animated-button:hover {
+	            transform: scale(1.1);
+	            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+	        }
+	
+	        .animated-button::before {
+	            content: '';
+	            position: absolute;
+	            width: 300%;
+	            height: 300%;
+	            background: rgba(255, 255, 255, 0.2);
+	            top: -100%;
+	            left: -100%;
+	            transition: all 0.6s ease;
+	            border-radius: 50%;
+	            z-index: 0;
+	        }
+	
+	        .animated-button:hover::before {
+	            top: 0;
+	            left: 0;
+	        }
+	
+	        .animated-button span {
+	            position: relative;
+	            z-index: 1;
+	        }
+	
+	        /* ===========================
+	           Responsive Adjustments
+	        =========================== */
+	        @media (max-width: 600px) {
+	            .animated-button {
+	                width: 100%;
+	                text-align: center;
+	            }
+	
+	            .animated-section h2 {
+	                font-size: 2em;
+	            }
+	
+	            .animated-section p {
+	                font-size: 1em;
+	            }
+	        }
+	    </style>
+	
+	    <!-- Embedded JavaScript to Trigger Animation on Page Load -->
+	    <script>
+	        document.addEventListener('DOMContentLoaded', () => {
+	            const aboutSection = document.getElementById('about');
+	            // Add the 'visible' class to trigger the fade-in and slide-up animation
+	            setTimeout(() => {
+	                aboutSection.classList.add('visible');
+	            }, 100); // Delay to ensure smooth animation
+	        });
+	    </script>
+	</section>
 
 <!-- HTML Section -->
 <section id="settings" style="display:none;">
