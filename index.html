@@ -418,233 +418,442 @@
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" style="display:none;">
-            <h2>About This Repository</h2>
-            <p>This repository is a curated collection of Python and HTML projects designed to help learners explore various programming concepts. Whether you're a beginner or an experienced developer, you'll find projects that cater to your skill level and interests.</p>
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Your Website Title</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background-color: #f0f0f0;
-                        color: #333;
-                        padding: 20px;
-                    }
-            
-                    section {
-                        background: white;
-                        padding: 20px;
-                        border-radius: 8px;
-                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                        margin-bottom: 20px;
-                    }
-            
-                    h2 {
-                        margin-bottom: 10px;
-                    }
-            
-                    .animated-button {
-                        display: inline-block;
-                        padding: 15px 30px;
-                        font-size: 20px;
-                        color: white;
-                        background: linear-gradient(45deg, #ff6ec4, #7873f5);
-                        border: none;
-                        border-radius: 50px;
-                        text-decoration: none;
-                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                        transition: all 0.4s ease;
-                        position: relative;
-                        overflow: hidden;
-                    }
-            
-                    .animated-button:hover {
-                        transform: scale(1.1);
-                        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-                    }
-            
-                    .animated-button::before {
-                        content: '';
-                        position: absolute;
-                        width: 300%;
-                        height: 300%;
-                        background: rgba(255, 255, 255, 0.2);
-                        top: -100%;
-                        left: -100%;
-                        transition: all 0.6s ease;
-                        border-radius: 50%;
-                        z-index: 0;
-                    }
-            
-                    .animated-button:hover::before {
-                        top: 0;
-                        left: 0;
-                    }
-            
-                    .animated-button span {
-                        position: relative;
-                        z-index: 1;
-                    }
-                </style>
-            </head>
-            <body>
-                <section id="about">
-                    <h2>About This Project</h2>
-                    <p>This project is designed to help users manage their coding projects efficiently.</p>
-                    <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank">Join Our Discord</a>
-                </section>
-            </body>
-            </html>
-            
-        </section>
+<!-- About Section with Animated Background -->
+<section id="about" class="animated-section">
+    <div class="content">
+        <h2>About This Project</h2>
+        <p>
+            This project is designed to help users manage their coding projects efficiently. It includes a variety of Python and HTML projects that cater to different skill levels, providing hands-on experience and practical knowledge.
+        </p>
+        <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank">
+            <span>Join Our Discord</span>
+        </a>
+    </div>
 
-        <!-- Settings Section -->
-        <section id="settings" style="display:none;">
-            <h2>Settings</h2>
-            <p>Select your preferred color theme:</p>
-            <select id="theme-select">
-                <option value="light-mode">Light</option>
-                <option value="dark-mode">Dark</option>
-                <option value="blue-mode">Blue</option>
-                <option value="green-mode">Green</option>
-            </select>
+    <!-- Embedded CSS for Animated Background and Section Styling -->
+    <style>
+        /* ===========================
+           Animated Section Styles
+        =========================== */
+        .animated-section {
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+            color: white;
+            text-align: center;
+            /* Initial hidden state */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            /* Animated gradient background */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
 
-        <!-- Account Management -->
-        <h2>Account Management</h2>
-        <p>Create or manage your accounts:</p>
-        <input type="text" id="username-input" placeholder="Username">
-        <input type="password" id="password-input" placeholder="Password">
+        /* Visible state triggers fade-in and slide-up */
+        .animated-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Keyframes for Gradient Animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Content Container Styling */
+        .animated-section .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            border-radius: 8px;
+        }
+
+        /* Heading Styling */
+        .animated-section h2 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        /* Paragraph Styling */
+        .animated-section p {
+            line-height: 1.6;
+            font-size: 1.2em;
+        }
+
+        /* ===========================
+           Animated Button Styles
+        =========================== */
+        .animated-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background: linear-gradient(45deg, #ff6ec4, #7873f5);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .animated-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .animated-button::before {
+            content: '';
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            top: -100%;
+            left: -100%;
+            transition: all 0.6s ease;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .animated-button:hover::before {
+            top: 0;
+            left: 0;
+        }
+
+        .animated-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===========================
+           Responsive Adjustments
+        =========================== */
+        @media (max-width: 600px) {
+            .animated-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .animated-section h2 {
+                font-size: 2em;
+            }
+
+            .animated-section p {
+                font-size: 1em;
+            }
+        }
+    </style>
+
+    <!-- Embedded JavaScript to Trigger Animation on Page Load -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const aboutSection = document.getElementById('about');
+            // Add the 'visible' class to trigger the fade-in and slide-up animation
+            setTimeout(() => {
+                aboutSection.classList.add('visible');
+            }, 100); // Delay to ensure smooth animation
+        });
+    </script>
+</section>
+
+<!-- HTML Section -->
+<section id="settings" style="display:none;">
+    <h2>Settings</h2>
+    <p>Select your preferred color theme:</p>
+    <select id="theme-select">
+        <option value="light-mode">Light</option>
+        <option value="dark-mode">Dark</option>
+        <option value="blue-mode">Blue</option>
+        <option value="green-mode">Green</option>
+    </select>
+
+    <h2>Account Management</h2>
+    <p>Create or manage your accounts:</p>
+    <div class="input-container">
+        <input type="text" id="username-input" placeholder="Username" required>
+        <input type="email" id="email-input" placeholder="Email" required>
+        <input type="password" id="password-input" placeholder="Password" required>
+        <button id="toggle-password-btn">Show</button>
+    </div>
+    <div class="button-container">
         <button id="create-account-btn">Create Account</button>
         <button id="login-btn">Login</button>
         <button id="logout-btn" style="display:none;">Logout</button>
-        <p id="account-status"></p>
+        <button id="delete-account-btn" style="display:none;">Delete Account</button>
+        <button id="send-verification-btn" style="display:none;">Send Verification Email</button>
+    </div>
+    <p id="account-status"></p>
 
-        <h2>Account List</h2>
-        <ul id="account-list"></ul>
-    </section>
+    <h2>Account List</h2>
+    <ul id="account-list"></ul>
+</section>
 
-    <script>
-        // Get the settings elements
-        const themeSelect = document.getElementById('theme-select');
-        const usernameInput = document.getElementById('username-input');
-        const passwordInput = document.getElementById('password-input');
-        const createAccountBtn = document.getElementById('create-account-btn');
-        const loginBtn = document.getElementById('login-btn');
-        const logoutBtn = document.getElementById('logout-btn');
-        const accountStatus = document.getElementById('account-status');
-        const accountList = document.getElementById('account-list');
+<script>
+    // Get the settings elements
+    const themeSelect = document.getElementById('theme-select');
+    const usernameInput = document.getElementById('username-input');
+    const emailInput = document.getElementById('email-input');
+    const passwordInput = document.getElementById('password-input');
+    const createAccountBtn = document.getElementById('create-account-btn');
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const deleteAccountBtn = document.getElementById('delete-account-btn');
+    const sendVerificationBtn = document.getElementById('send-verification-btn');
+    const togglePasswordBtn = document.getElementById('toggle-password-btn');
+    const accountStatus = document.getElementById('account-status');
+    const accountList = document.getElementById('account-list');
 
-        // Function to apply the theme
-        function applyTheme(theme) {
-            document.body.classList.remove('light-mode', 'dark-mode', 'blue-mode', 'green-mode');
-            document.body.classList.add(theme);
+    // Function to apply the selected theme
+    function applyTheme(theme) {
+        document.body.classList.remove('light-mode', 'dark-mode', 'blue-mode', 'green-mode');
+        document.body.classList.add(theme);
+    }
+
+    // Function to create an account
+    function createAccount(username, email, password) {
+        if (!isValidEmail(email)) {
+            alert('Invalid email format!');
+            return;
         }
 
-        // Function to create an account
-        function createAccount(username, password) {
-            const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
-            const existingAccount = accounts.find(account => account.username === username);
-            if (existingAccount) {
-                alert('Account already exists!');
-                return;
-            }
-            accounts.push({ username, password });
-            localStorage.setItem('accounts', JSON.stringify(accounts));
-            updateAccountList();
-            alert('Account created successfully!');
+        const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
+        const existingAccount = accounts.find(account => account.username === username || account.email === email);
+        
+        if (existingAccount) {
+            alert('Account with this username or email already exists!');
+            return;
         }
-
-        // Function to login
-        function login(username, password) {
-            const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
-            const account = accounts.find(account => account.username === username && account.password === password);
-            if (!account) {
-                alert('Invalid username or password!');
-                return;
-            }
-            localStorage.setItem('currentAccount', JSON.stringify(account));
-            updateAccountStatus();
-            alert('Logged in successfully!');
-        }
-
-        // Function to logout
-        function logout() {
-            localStorage.removeItem('currentAccount');
-            updateAccountStatus();
-            alert('Logged out successfully!');
-        }
-
-        // Function to update the account list
-        function updateAccountList() {
-            const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
-            accountList.innerHTML = '';
-            accounts.forEach(account => {
-                const listItem = document.createElement('li');
-                listItem.textContent = account.username;
-                accountList.appendChild(listItem);
-            });
-        }
-
-        // Function to update the account status
-        function updateAccountStatus() {
-            const currentAccount = localStorage.getItem('currentAccount') ? JSON.parse(localStorage.getItem('currentAccount')) : null;
-            if (currentAccount) {
-                accountStatus.textContent = `Logged in as ${currentAccount.username}`;
-                logoutBtn.style.display = 'block';
-                loginBtn.style.display = 'none';
-            } else {
-                accountStatus.textContent = 'Not logged in';
-                logoutBtn.style.display = 'none';
-                loginBtn.style.display = 'block';
-            }
-        }
-
-        // Add event listeners to the settings elements
-        themeSelect.addEventListener('change', () => applyTheme(themeSelect.value));
-        createAccountBtn.addEventListener('click', () => createAccount(usernameInput.value, passwordInput.value));
-        loginBtn.addEventListener('click', () => login(usernameInput.value, passwordInput.value));
-        logoutBtn.addEventListener('click', logout);
-
-        // Update the account list and status on page load
+        
+        accounts.push({ username, email, password, verified: false });
+        localStorage.setItem('accounts', JSON.stringify(accounts));
         updateAccountList();
+
+        alert('Account created successfully!');
+    }
+
+    // Function to login
+    function login(username, password) {
+        const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
+        const account = accounts.find(account => account.username === username && account.password === password);
+        
+        if (!account) {
+            alert('Invalid username or password!');
+            return;
+        }
+        
+        localStorage.setItem('currentAccount', JSON.stringify(account));
         updateAccountStatus();
-    </script>
+        alert('Logged in successfully!');
 
-    <style>
-        /* Themes */
-        .light-mode {
-            background-color: #f0f0f0;
-            color: #000;
+        // Show verification option if not verified
+        if (!account.verified) {
+            sendVerificationBtn.style.display = 'block';
+        } else {
+            sendVerificationBtn.style.display = 'none';
         }
+    }
 
-        .dark-mode {
-            background-color: #333;
-            color: #fff;
+    // Function to send verification email
+    function sendVerificationEmail(email) {
+        fetch('http://localhost:5000/send-verification', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Verification email sent successfully!');
+            } else {
+                alert('Failed to send verification email.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Function to logout
+    function logout() {
+        localStorage.removeItem('currentAccount');
+        updateAccountStatus();
+        alert('Logged out successfully!');
+    }
+
+    // Function to delete account
+    function deleteAccount(username) {
+        let accounts = JSON.parse(localStorage.getItem('accounts'));
+        accounts = accounts.filter(account => account.username !== username);
+        localStorage.setItem('accounts', JSON.stringify(accounts));
+        logout();
+        updateAccountList();
+        alert('Account deleted successfully!');
+    }
+
+    // Function to update the account list
+    function updateAccountList() {
+        const accounts = localStorage.getItem('accounts') ? JSON.parse(localStorage.getItem('accounts')) : [];
+        accountList.innerHTML = '';
+        
+        accounts.forEach(account => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${account.username} (${account.verified ? 'Verified' : 'Not Verified'})`;
+            listItem.classList.add('fade-in'); // Add animation class
+            accountList.appendChild(listItem);
+        });
+    }
+
+    // Function to update the account status
+    function updateAccountStatus() {
+        const currentAccount = localStorage.getItem('currentAccount') ? JSON.parse(localStorage.getItem('currentAccount')) : null;
+        
+        if (currentAccount) {
+            accountStatus.textContent = `Logged in as ${currentAccount.username}`;
+            logoutBtn.style.display = 'block';
+            loginBtn.style.display = 'none';
+            deleteAccountBtn.style.display = 'block'; // Show delete button when logged in
+            sendVerificationBtn.style.display = currentAccount.verified ? 'none' : 'block';
+        } else {
+            accountStatus.textContent = 'Not logged in';
+            logoutBtn.style.display = 'none';
+            loginBtn.style.display = 'block';
+            deleteAccountBtn.style.display = 'none'; // Hide delete button when logged out
+            sendVerificationBtn.style.display = 'none';
         }
+    }
 
-        .blue-mode {
-            background-color: #456;
-            color: #fff;
+    // Add event listeners to the settings elements
+    themeSelect.addEventListener('change', () => applyTheme(themeSelect.value));
+    createAccountBtn.addEventListener('click', () => createAccount(usernameInput.value, emailInput.value, passwordInput.value));
+    loginBtn.addEventListener('click', () => login(usernameInput.value, passwordInput.value));
+    logoutBtn.addEventListener('click', () => logout());
+    deleteAccountBtn.addEventListener('click', () => deleteAccount(usernameInput.value));
+    sendVerificationBtn.addEventListener('click', () => {
+        const currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
+        if (currentAccount) {
+            sendVerificationEmail(currentAccount.email);
+        } else {
+            alert('You need to be logged in to send a verification email.');
         }
+    });
+    togglePasswordBtn.addEventListener('click', () => {
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        togglePasswordBtn.textContent = passwordInput.type === 'password' ? 'Show' : 'Hide';
+    });
 
-        . green-mode {
-            background-color: #678;
-            color: #fff;
+    // Validation function for email format
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    }
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        transition: background-color 0.3s;
+    }
+
+    .light-mode {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    .dark-mode {
+        background-color: #333;
+        color: #f2f2f2;
+    }
+
+    .blue-mode {
+        background-color: #007BFF;
+        color: #fff;
+    }
+
+    .green-mode {
+        background-color: #28A745;
+        color: #fff;
+    }
+
+    h2 {
+        color: #007BFF;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .input-container {
+        margin-bottom: 20px;
+    }
+
+    input {
+        padding: 10px;
+        margin: 5px 0;
+        width: calc(100% - 20px);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+
+    input:focus {
+        border-color: #007BFF;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
         }
-    </style>
-        </section>
-    </main>
+        to {
+            opacity: 1;
+        }
+    }
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Project Repository. All rights reserved.</p>
-    </footer>
+    #account-list {
+        list-style-type: none;
+        padding: 0;
+    }
 
+    #account-list li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        transition: background-color 0.3s;
+    }
+
+    #account-list li:hover {
+        background-color: #e9ecef;
+    }
+</style>
+
+        
     <!-- Embedded JavaScript for interactivity -->
     <script>
         /**
