@@ -564,411 +564,302 @@
 	    </script>
 	</section>
 
-wfme
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Management System</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        .account-list {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .account-item:last-child {
+            border-bottom: none;
+        }
+        button {
+            margin-left: 5px;
+        }
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
 
-<!-- HTML Section -->
-<section id="settings" style="display:none;">
-    <h2>Settings</h2>
-    <p>Select your preferred color theme:</p>
-    <select id="theme-select">
-        <option value="light-mode">Light</option>
-        <option value="dark-mode">Dark</option>
-        <option value="blue-mode">Blue</option>
-        <option value="green-mode">Green</option>
-    </select>
-
-    <h2>Account Management</h2>
-    <p>Create or manage your accounts:</p>
-    <div class="input-container">
-        <input type="text" id="username-input" placeholder="Username" required>
-        <input type="email" id="email-input" placeholder="Email" required>
-        <input type="password" id="password-input" placeholder="Password" required>
-        <button id="toggle-password-btn">Show</button>
+<div class="container">
+    <h1>Account Management System</h1>
+    
+    <!-- Login Area -->
+    <div id="loginArea">
+        <h2>Login</h2>
+        <input type="text" id="loginUsernameInput" placeholder="Username" required>
+        <input type="password" id="loginPasswordInput" placeholder="Password" required>
+        <button id="loginBtn">Login</button>
     </div>
-    <div class="button-container">
-        <button id="create-account-btn">Create Account</button>
-        <button id="login-btn">Login</button>
-        <button id="logout-btn" style="display:none;">Logout</button>
-        <button id="delete-account-btn" style="display:none;">Delete Account</button>
-        <button id="ban-account-btn" style="display:none;">Ban Account</button>
-        <button id="send-verification-btn" style="display:none;">Send Verification Email</button>
+
+    <!-- Account Creation -->
+    <h2>Create Account</h2>
+    <input type="text" id="createUsernameInput" placeholder="Username" required>
+    <input type="email" id="createEmailInput" placeholder="Email" required>
+    <input type="password" id="createPasswordInput" placeholder="Password" required>
+    <button id="createAccountBtn">Create Account</button>
+
+    <!-- Logged In User Info -->
+    <div id="userInfo" class="hidden">
+        <p id="loggedInAs"></p>
+        <button id="logoutBtn">Logout</button>
     </div>
-    <p id="account-status"></p>
 
-    <!-- Admin Section -->
-    <div id="admin-section" style="display:none;">
-        <h2>Admin Panel</h2>
-        <h3>All User Accounts</h3>
-        <ul id="admin-account-list"></ul>
-
-        <!-- Modal for Account Details -->
-        <div id="account-modal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <h3>Account Details</h3>
-                <p><strong>Username:</strong> <span id="modal-username"></span></p>
-                <p><strong>Email:</strong> <span id="modal-email"></span></p>
-                <p><strong>Verified:</strong> <span id="modal-verified"></span></p>
-                <p><strong>Status:</strong> <span id="modal-status"></span></p>
-                <button id="reset-password-btn">Reset Password</button>
-                <button id="toggle-verification-btn">Toggle Verification</button>
-            </div>
-        </div>
+    <!-- Admin Management Section -->
+    <div id="adminSection" class="hidden">
+        <h2>Admin Actions</h2>
+        <div id="accountList" class="account-list"></div>
     </div>
-    <!-- End of Admin Section -->
+</div>
 
-    <h2>Account List</h2>
-    <ul id="account-list"></ul>
-</section>
-
-<!-- CSS for Modal (Add this within your <style> tags or CSS file) -->
-<style>
-    .modal {
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.5);
-    }
-    .modal-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 500px;
-        border-radius: 8px;
-    }
-    .close-btn {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .close-btn:hover,
-    .close-btn:focus {
-        color: black;
-        text-decoration: none;
-    }
-    /* Optional: Add some styling for admin account list */
-    #admin-account-list li {
-        cursor: pointer;
-        padding: 5px;
-        border-bottom: 1px solid #ddd;
-    }
-    #admin-account-list li:hover {
-        background-color: #f1f1f1;
-    }
-</style>
+<!-- Modal for Account Management -->
+<div id="accountModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" style="cursor:pointer; float:right;">&times;</span>
+        <h2>Account Management</h2>
+        <p id="accountDetails"></p>
+        <input type="text" id="newEmailInput" placeholder="New Email">
+        <button id="changeEmailBtn">Change Email</button>
+        <button id="deleteAccountBtn">Delete Account</button>
+        <button id="banAccountBtn">Ban Account</button>
+        <button id="unbanAccountBtn">Unban Account</button>
+        <button id="toggleVerificationBtn">Toggle Verification</button>
+    </div>
+</div>
 
 <script>
-    // Admin Credentials (Username and SHA-256 Hashed Password)
-    const ADMIN_USERNAME = 'admin';
-    const ADMIN_PASSWORD = 'Citbwitww.123'; // Admin password
-    const ADMIN_EMAIL = 'admin'; // Admin email
-    let ADMIN_PASSWORD_HASH = ''; // Placeholder for hashed password
+let loggedInUser = null;
+let currentAccount = null; // Store the current account being managed
 
-    // Hash the admin password on page load
-    (async function hashAdminPassword() {
-        ADMIN_PASSWORD_HASH = await hashString(ADMIN_PASSWORD);
-    })();
-
-    // Get the settings elements
-    const themeSelect = document.getElementById('theme-select');
-    const usernameInput = document.getElementById('username-input');
-    const emailInput = document.getElementById('email-input');
-    const passwordInput = document.getElementById('password-input');
-    const createAccountBtn = document.getElementById('create-account-btn');
-    const loginBtn = document.getElementById('login-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const deleteAccountBtn = document.getElementById('delete-account-btn');
-    const banAccountBtn = document.getElementById('ban-account-btn');
-    const sendVerificationBtn = document.getElementById('send-verification-btn');
-    const togglePasswordBtn = document.getElementById('toggle-password-btn');
-    const accountStatus = document.getElementById('account-status');
-    const accountList = document.getElementById('account-list');
-    const adminSection = document.getElementById('admin-section');
-    const adminAccountList = document.getElementById('admin-account-list');
-
-    // Modal Elements
-    const accountModal = document.getElementById('account-modal');
-    const closeModalBtn = document.querySelector('.close-btn');
-    const modalUsername = document.getElementById('modal-username');
-    const modalEmail = document.getElementById('modal-email');
-    const modalVerified = document.getElementById('modal-verified');
-    const modalStatus = document.getElementById('modal-status');
-    const resetPasswordBtn = document.getElementById('reset-password-btn');
-    const toggleVerificationBtn = document.getElementById('toggle-verification-btn');
-
-    let selectedAccount = null; // To keep track of the account selected in the modal
-
-    // Function to apply the selected theme
-    function applyTheme(theme) {
-        document.body.classList.remove('light-mode', 'dark-mode', 'blue-mode', 'green-mode');
-        document.body.classList.add(theme);
+// Functions
+function createAccount(username, email, password) {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    if (accounts.find(acc => acc.username === username)) {
+        alert('Username already exists.');
+        return;
     }
+    accounts.push({ username, email, password, status: 'active', verified: false });
+    localStorage.setItem('accounts', JSON.stringify(accounts));
+    alert('Account created successfully.');
+    updateAccountList();  // Update the account list after creating a new account
+}
 
-    // Function to hash a string using SHA-256
-    async function hashString(str) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(str);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        return hashHex;
+function login(username, password) {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const user = accounts.find(acc => acc.username === username && acc.password === password);
+    if (user) {
+        loggedInUser = user;
+        updateUI();
+        alert('Logged in successfully.');
+    } else {
+        alert('Invalid username or password.');
     }
+}
 
-    // Function to create an account
-    async function createAccount(username, email, password) {
-        if (!isValidEmail(email)) {
-            alert('Invalid email format!');
-            return;
-        }
+function logout() {
+    loggedInUser = null;
+    updateUI();
+}
 
-        // Check if email is banned
-        const bannedEmails = JSON.parse(localStorage.getItem('bannedEmails')) || [];
-        if (bannedEmails.includes(email.toLowerCase())) {
-            alert('This email has been banned and cannot be used to create an account.');
-            return;
-        }
+function updateAccountList() {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const accountList = document.getElementById('accountList');
+    accountList.innerHTML = '';
 
-        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-        const existingAccount = accounts.find(account => account.username === username || account.email === email.toLowerCase());
+    accounts.forEach(account => {
+        const accountItem = document.createElement('div');
+        accountItem.classList.add('account-item');
+        accountItem.innerHTML = ` 
+            <span>${account.username} (${account.email}) - Status: ${account.status} - Verified: ${account.verified}</span>
+            <div>
+                <button onclick="openAccountModal('${account.username}')">Manage</button>
+            </div>
+        `;
+        accountList.appendChild(accountItem);
+    });
+}
 
-        if (existingAccount) {
-            alert('Account with this username or email already exists!');
-            return;
-        }
+// Open modal for account management
+function openAccountModal(username) {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    currentAccount = accounts.find(acc => acc.username === username);
+    document.getElementById('accountDetails').textContent = `Managing: ${currentAccount.username} (${currentAccount.email})`;
+    document.getElementById('newEmailInput').value = ''; // Clear email input
+    document.getElementById('accountModal').style.display = "block";
+}
 
-        const passwordHash = await hashString(password);
-        accounts.push({ 
-            username, 
-            email: email.toLowerCase(), 
-            passwordHash, 
-            verified: false, 
-            status: 'active' // status can be 'active', 'deleted', 'banned'
-        });
+// Account management functions
+function changeEmail(newEmail) {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const account = accounts.find(acc => acc.username === currentAccount.username);
+    if (account) {
+        account.email = newEmail;
+        alert(`Email for ${account.username} has been changed to ${newEmail}.`);
         localStorage.setItem('accounts', JSON.stringify(accounts));
         updateAccountList();
-        updateAdminAccountList();
-
-        alert('Account created successfully!');
     }
+}
 
-    // Function to login
-    async function login(username, password) {
-        if (username === ADMIN_USERNAME) {
-            const passwordHash = await hashString(password);
-            if (passwordHash === ADMIN_PASSWORD_HASH) {
-                localStorage.setItem('currentAccount', JSON.stringify({ username: ADMIN_USERNAME, email: ADMIN_EMAIL, role: 'admin' }));
-                updateAccountStatus();
-                alert('Admin logged in successfully!');
-                return;
-            } else {
-                alert('Invalid admin credentials!');
-                return;
-            }
-        }
-
-        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-        const account = accounts.find(acc => acc.username === username);
-
-        if (!account) {
-            alert('Invalid username or password!');
-            return;
-        }
-
-        if (account.status === 'deleted') {
-            alert('Cannot login because the account has been deleted.');
-            return;
-        }
-
-        if (account.status === 'banned') {
-            alert('Cannot login because the account has been banned.');
-            return;
-        }
-
-        const passwordHash = await hashString(password);
-        if (passwordHash !== account.passwordHash) {
-            alert('Invalid username or password!');
-            return;
-        }
-
-        localStorage.setItem('currentAccount', JSON.stringify(account));
-        updateAccountStatus();
-        alert('Logged in successfully!');
-    }
-
-    // Function to logout
-    function logout() {
-        localStorage.removeItem('currentAccount');
-        updateAccountStatus();
-        alert('Logged out successfully!');
-    }
-
-    // Function to delete an account
-    function deleteAccount() {
-        const currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
-        if (currentAccount) {
-            const accounts = JSON.parse(localStorage.getItem('accounts'));
-            const updatedAccounts = accounts.filter(acc => acc.username !== currentAccount.username);
-            localStorage.setItem('accounts', JSON.stringify(updatedAccounts));
-            localStorage.removeItem('currentAccount');
-            updateAccountList();
-            updateAdminAccountList();
-            alert('Account deleted successfully!');
-        } else {
-            alert('No account is logged in!');
-        }
-    }
-
-    // Function to ban an account
-    function banAccount() {
-        const currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
-        if (currentAccount) {
-            const accounts = JSON.parse(localStorage.getItem('accounts'));
-            const account = accounts.find(acc => acc.username === currentAccount.username);
-            if (account) {
-                account.status = 'banned';
-                localStorage.setItem('accounts', JSON.stringify(accounts));
-                alert('Account banned successfully!');
-                updateAccountList();
-                updateAdminAccountList();
-            }
-        } else {
-            alert('No account is logged in!');
-        }
-    }
-
-    // Function to send a verification email
-    function sendVerificationEmail() {
-        const currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
-        if (currentAccount) {
-            alert(`Verification email sent to ${currentAccount.email}!`);
-            // Here you would actually send a verification email
-        } else {
-            alert('No account is logged in!');
-        }
-    }
-
-    // Function to toggle password visibility
-    function togglePasswordVisibility() {
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
-        togglePasswordBtn.textContent = type === 'password' ? 'Show' : 'Hide';
-    }
-
-    // Function to update account status display
-    function updateAccountStatus() {
-        const currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
-        if (currentAccount) {
-            accountStatus.textContent = `Logged in as: ${currentAccount.username}`;
-            logoutBtn.style.display = 'inline';
-            deleteAccountBtn.style.display = 'inline';
-            banAccountBtn.style.display = currentAccount.role === 'admin' ? 'inline' : 'none';
-            sendVerificationBtn.style.display = currentAccount.role === 'admin' ? 'inline' : 'none';
-            adminSection.style.display = currentAccount.role === 'admin' ? 'block' : 'none';
-        } else {
-            accountStatus.textContent = 'Not logged in';
-            logoutBtn.style.display = 'none';
-            deleteAccountBtn.style.display = 'none';
-            banAccountBtn.style.display = 'none';
-            sendVerificationBtn.style.display = 'none';
-            adminSection.style.display = 'none';
-        }
-    }
-
-    // Function to update account list
-    function updateAccountList() {
-        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-        accountList.innerHTML = '';
-        accounts.forEach(account => {
-            const li = document.createElement('li');
-            li.textContent = account.username;
-            accountList.appendChild(li);
-        });
-    }
-
-    // Function to update admin account list
-    function updateAdminAccountList() {
-        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-        adminAccountList.innerHTML = '';
-        accounts.forEach(account => {
-            const li = document.createElement('li');
-            li.textContent = account.username;
-            li.onclick = () => showAccountDetails(account);
-            adminAccountList.appendChild(li);
-        });
-    }
-
-    // Function to show account details in modal
-    function showAccountDetails(account) {
-        selectedAccount = account;
-        modalUsername.textContent = account.username;
-        modalEmail.textContent = account.email;
-        modalVerified.textContent = account.verified ? 'Yes' : 'No';
-        modalStatus.textContent = account.status;
-        accountModal.style.display = 'block';
-    }
-
-    // Function to reset password
-    async function resetPassword() {
-        if (selectedAccount) {
-            const newPassword = prompt('Enter new password:');
-            if (newPassword) {
-                selectedAccount.passwordHash = await hashString(newPassword);
-                const accounts = JSON.parse(localStorage.getItem('accounts'));
-                const index = accounts.findIndex(acc => acc.username === selectedAccount.username);
-                accounts[index] = selectedAccount;
-                localStorage.setItem('accounts', JSON.stringify(accounts));
-                alert('Password reset successfully!');
-                accountModal.style.display = 'none';
-            }
-        }
-    }
-
-    // Function to toggle verification status
-    function toggleVerification() {
-        if (selectedAccount) {
-            selectedAccount.verified = !selectedAccount.verified;
-            const accounts = JSON.parse(localStorage.getItem('accounts'));
-            const index = accounts.findIndex(acc => acc.username === selectedAccount.username);
-            accounts[index] = selectedAccount;
-            localStorage.setItem('accounts', JSON.stringify(accounts));
-            alert(`Account verification status changed to ${selectedAccount.verified ? 'verified' : 'not verified'}!`);
-            modalVerified.textContent = selectedAccount.verified ? 'Yes' : 'No';
-        }
-    }
-
-    // Close the modal when the close button is clicked
-    closeModalBtn.onclick = function() {
-        accountModal.style.display = 'none';
-    };
-
-    // Event listeners
-    themeSelect.onchange = () => applyTheme(themeSelect.value);
-    createAccountBtn.onclick = () => createAccount(usernameInput.value, emailInput.value, passwordInput.value);
-    loginBtn.onclick = () => login(usernameInput.value, passwordInput.value);
-    logoutBtn.onclick = () => logout();
-    deleteAccountBtn.onclick = () => deleteAccount();
-    banAccountBtn.onclick = () => banAccount();
-    sendVerificationBtn.onclick = () => sendVerificationEmail();
-    togglePasswordBtn.onclick = () => togglePasswordVisibility();
-    resetPasswordBtn.onclick = () => resetPassword();
-    toggleVerificationBtn.onclick = () => toggleVerification();
-
-    // Update account status on page load
-    updateAccountStatus();
+function deleteAccount() {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const filteredAccounts = accounts.filter(acc => acc.username !== currentAccount.username);
+    localStorage.setItem('accounts', JSON.stringify(filteredAccounts));
+    alert(`${currentAccount.username} has been deleted.`);
     updateAccountList();
-    updateAdminAccountList();
+    closeModal(); // Close the modal after deletion
+}
 
-    // Optional: Hide the settings section on page load
-    document.getElementById('settings').style.display = 'block';
+function banAccount(username) {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const account = accounts.find(acc => acc.username === username);
+    if (account) {
+        account.status = 'banned';
+        alert(`${username} has been banned.`);
+        localStorage.setItem('accounts', JSON.stringify(accounts));
+        updateAccountList();
+        closeModal();
+    }
+}
+
+function unbanAccount(username) {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const account = accounts.find(acc => acc.username === username);
+    if (account) {
+        account.status = 'active';
+        alert(`${username} has been unbanned.`);
+        localStorage.setItem('accounts', JSON.stringify(accounts));
+        updateAccountList();
+        closeModal();
+    }
+}
+
+function toggleVerification(username) {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const account = accounts.find(acc => acc.username === username);
+    if (account) {
+        account.verified = !account.verified;
+        alert(`${username} verification status changed to ${account.verified ? 'verified' : 'not verified'}.`);
+        localStorage.setItem('accounts', JSON.stringify(accounts));
+        updateAccountList();
+        closeModal();
+    }
+}
+
+function closeModal() {
+    document.getElementById('accountModal').style.display = "none";
+}
+
+// Update UI based on login status
+function updateUI() {
+    const loginArea = document.getElementById('loginArea');
+    const userInfo = document.getElementById('userInfo');
+    const loggedInAs = document.getElementById('loggedInAs');
+    const adminSection = document.getElementById('adminSection');
+
+    if (loggedInUser) {
+        loginArea.classList.add('hidden');
+        userInfo.classList.remove('hidden');
+        loggedInAs.textContent = `Logged in as: ${loggedInUser.username}`;
+        userInfo.classList.remove('hidden');
+        if (loggedInUser.username === 'admin') {
+            adminSection.classList.remove('hidden');
+            updateAccountList();  // Update the account list for admin view
+        } else {
+            adminSection.classList.add('hidden');
+        }
+    } else {
+        loginArea.classList.remove('hidden');
+        userInfo.classList.add('hidden');
+        adminSection.classList.add('hidden');
+    }
+}
+
+// Event Listeners
+document.getElementById('createAccountBtn').addEventListener('click', () => {
+    const username = document.getElementById('createUsernameInput').value;
+    const email = document.getElementById('createEmailInput').value;
+    const password = document.getElementById('createPasswordInput').value;
+    createAccount(username, email, password);
+});
+
+document.getElementById('loginBtn').addEventListener('click', () => {
+    const username = document.getElementById('loginUsernameInput').value;
+    const password = document.getElementById('loginPasswordInput').value;
+    login(username, password);
+});
+
+document.getElementById('logoutBtn').addEventListener('click', logout);
+document.getElementById('changeEmailBtn').addEventListener('click', () => {
+    const newEmail = document.getElementById('newEmailInput').value;
+    changeEmail(newEmail);
+});
+
+document.getElementById('deleteAccountBtn').addEventListener('click', deleteAccount);
+document.getElementById('banAccountBtn').addEventListener('click', () => banAccount(currentAccount.username));
+document.getElementById('unbanAccountBtn').addEventListener('click', () => unbanAccount(currentAccount.username));
+document.getElementById('toggleVerificationBtn').addEventListener('click', () => toggleVerification(currentAccount.username));
+document.getElementById('closeModal').addEventListener('click', closeModal);
 </script>
+
+</body>
+</html>
+
+
+
 
 
 <style>
