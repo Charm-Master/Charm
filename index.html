@@ -565,6 +565,572 @@
 	</section>
 
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charm</title>
+    <!-- External CSS for better organization (optional) -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <!-- Embedded CSS for styling -->
+    <style>
+        /* ===========================
+           RESET & BOX-SIZING
+        =========================== */
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===========================
+           THEME STYLES USING CSS VARIABLES
+        =========================== */
+        :root {
+            /* Light Theme Variables */
+            --background-color: #f4f4f4;
+            --text-color: #333333;
+            --nav-background: #35424a;
+            --nav-text-color: #ffffff;
+            --button-background: #35424a;
+            --button-text-color: #ffffff;
+            --button-hover-background: #1f2a30;
+            --download-background: #e8491d;
+            --download-hover-background: #cf3e13;
+            --code-background: #2d2d2d;
+            --code-text-color: #cccccc;
+            --card-background: #ffffff;
+            --card-text-color: #333333;
+        }
+
+        /* Dark Theme */
+        body.dark-mode {
+            --background-color: #121212;
+            --text-color: #f4f4f4;
+            --nav-background: #1f1f1f;
+            --nav-text-color: #ffffff;
+            --button-background: #444444;
+            --button-text-color: #ffffff;
+            --button-hover-background: #555555;
+            --download-background: #e8491d;
+            --download-hover-background: #cf3e13;
+            --code-background: #1e1e1e;
+            --code-text-color: #f4f4f4;
+            --card-background: #1e1e1e;
+            --card-text-color: #f4f4f4;
+        }
+
+        /* Blue Theme */
+        body.blue-mode {
+            --background-color: #e3f2fd;
+            --text-color: #0d47a1;
+            --nav-background: #1565c0;
+            --nav-text-color: #ffffff;
+            --button-background: #1976d2;
+            --button-text-color: #ffffff;
+            --button-hover-background: #0d47a1;
+            --download-background: #1e88e5;
+            --download-hover-background: #1565c0;
+            --code-background: #bbdefb;
+            --code-text-color: #0d47a1;
+            --card-background: #ffffff;
+            --card-text-color: #0d47a1;
+        }
+
+        /* Green Theme */
+        body.green-mode {
+            --background-color: #e8f5e9;
+            --text-color: #1b5e20;
+            --nav-background: #388e3c;
+            --nav-text-color: #ffffff;
+            --button-background: #43a047;
+            --button-text-color: #ffffff;
+            --button-hover-background: #2e7d32;
+            --download-background: #66bb6a;
+            --download-hover-background: #388e3c;
+            --code-background: #c8e6c9;
+            --code-text-color: #1b5e20;
+            --card-background: #ffffff;
+            --card-text-color: #1b5e20;
+        }
+
+        /* ===========================
+           BASE STYLES
+        =========================== */
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* ===========================
+           NAVIGATION BAR STYLES
+        =========================== */
+        nav {
+            background-color: var(--nav-background);
+            color: var(--nav-text-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--nav-text-color);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--download-background);
+        }
+
+        /* ===========================
+           MAIN CONTENT STYLES
+        =========================== */
+        main {
+            padding: 20px;
+        }
+
+        /* Section styling */
+        section {
+            padding: 60px 0;
+        }
+
+        /* Home section */
+        #home {
+            text-align: center;
+        }
+
+        #home img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        /* Repository sections */
+        #repository .projects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Project card styling */
+        .project-card {
+            background-color: var(--card-background);
+            color: var(--card-text-color);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .project-card h3 {
+            margin-bottom: 10px;
+            color: var(--card-text-color);
+        }
+
+        .project-card p {
+            margin-bottom: 15px;
+            color: var(--card-text-color);
+            flex-grow: 1; /* Ensures buttons stay at the bottom */
+        }
+
+        .project-card .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .project-card button, .project-card a.download-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            color: var(--button-text-color);
+        }
+
+        .project-card button.view-btn {
+            background-color: var(--button-background);
+            color: var(--button-text-color);
+        }
+
+        .project-card button.view-btn:hover {
+            background-color: var(--button-hover-background);
+        }
+
+        .project-card a.download-btn {
+            background-color: var(--download-background);
+            color: var(--button-text-color);
+        }
+
+        .project-card a.download-btn:hover {
+            background-color: var(--download-hover-background);
+        }
+
+        /* Code container styling */
+        .code-container {
+            display: none;
+            background-color: var(--code-background);
+            color: var(--code-text-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        .code-container pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* About section */
+        #about {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Settings section */
+        #settings {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Toggle Switch Styling */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin-top: 20px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #e8491d;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: var(--nav-background);
+            color: var(--nav-text-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+
+        /* ===========================
+           RESPONSIVE DESIGN
+        =========================== */
+        @media (max-width: 768px) {
+            .project-card {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-card {
+                width: 100%;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Charm</div>
+        <ul>
+            <li><a href="#home" onclick="showSection('home')">Home</a></li>
+            <li><a href="#python-repo" onclick="showSection('python-repo')">Python Repository</a></li>
+            <li><a href="#html-repo" onclick="showSection('html-repo')">HTML Repository</a></li>
+            <li><a href="#about" onclick="showSection('about')">About</a></li>
+            <li><a href="#settings" onclick="showSection('settings')">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+	<!-- Inside your <section id="home"> -->
+	<section id="home">
+    	<h1>Welcome to the Project Repository</h1>
+    	<p>Explore, view, and download a collection of Python and HTML projects with detailed descriptions.</p>
+      <h9>
+      <head>
+      <!-- Font Awesome Icon Library -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+      .checked {
+        color: orange;
+      }
+      </style>
+      </head>
+      <body>
+	
+	<img src="https://cdn.stocksnap.io/img-thumbs/960w/programming-code_1STVFMTBJY.jpg" alt="Description of the image">
+
+      <h2>Star Rating</h2>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+
+      </body>
+	<p>"The Design Layout, gives a real sense of coding." - AnonymousF</p>
+	<p></p>
+	<p>"Its so easy to understand and use." - AnonymousElite</p>
+	<p></p>
+	<p>"I'm lovin' it." - AnonymousM</p>
+	<p></p>
+	<p>"Too easy" - Anonymous</p>
+      </h9>
+	</section>
+
+
+
+        <!-- Python Repository Section -->
+        <section id="python-repo" style="display:none;">
+            <h2>Python Project Repository</h2>
+            <div class="projects" id="python-projects-container">
+                <!-- Python project cards will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- HTML Repository Section -->
+        <section id="html-repo" style="display:none;">
+            <h2>HTML Project Repository</h2>
+            <div class="projects" id="html-projects-container">
+                <!-- HTML project cards will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+	<!-- About Section with Animated Background -->
+	<section id="about" class="animated-section" style="display: none;">
+	    <div class="content">
+	        <h2>About This Project</h2>
+	        <p>
+	            This project is designed to help users manage their coding projects efficiently. It includes a variety of Python and HTML projects that cater to different skill levels, providing hands-on experience and practical knowledge.
+	        </p>
+	        <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank">
+	            <span>Join Our Discord</span>
+	        </a>
+	    </div>
+	
+	    <!-- Embedded CSS for Animated Background and Section Styling -->
+	    <style>
+	        /* ===========================
+	           Animated Section Styles
+	        =========================== */
+	        .animated-section {
+	            position: relative;
+	            overflow: hidden;
+	            padding: 60px 20px;
+	            color: white;
+	            text-align: center;
+	            /* Initial hidden state */
+	            opacity: 0;
+	            transform: translateY(20px);
+	            transition: opacity 1s ease-out, transform 1s ease-out;
+	            /* Animated gradient background */
+	            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	            background-size: 400% 400%;
+	            animation: gradientBG 15s ease infinite;
+	        }
+	
+	        /* Visible state triggers fade-in and slide-up */
+	        .animated-section.visible {
+	            opacity: 1;
+	            transform: translateY(0);
+	        }
+	
+	        /* Keyframes for Gradient Animation */
+	        @keyframes gradientBG {
+	            0% { background-position: 0% 50%; }
+	            50% { background-position: 100% 50%; }
+	            100% { background-position: 0% 50%; }
+	        }
+	
+	        /* Content Container Styling */
+	        .animated-section .content {
+	            max-width: 800px;
+	            margin: 0 auto;
+	            padding: 20px;
+	            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	            border-radius: 8px;
+	        }
+	
+	        /* Heading Styling */
+	        .animated-section h2 {
+	            margin-bottom: 20px;
+	            font-size: 2.5em;
+	        }
+	
+	        /* Paragraph Styling */
+	        .animated-section p {
+	            line-height: 1.6;
+	            font-size: 1.2em;
+	        }
+	
+	        /* ===========================
+	           Animated Button Styles
+	        =========================== */
+	        .animated-button {
+	            display: inline-block;
+	            padding: 15px 30px;
+	            font-size: 20px;
+	            color: white;
+	            background: linear-gradient(45deg, #ff6ec4, #7873f5);
+	            border: none;
+	            border-radius: 50px;
+	            text-decoration: none;
+	            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+	            transition: all 0.4s ease;
+	            position: relative;
+	            overflow: hidden;
+	            cursor: pointer;
+	            margin-top: 20px;
+	        }
+	
+	        .animated-button:hover {
+	            transform: scale(1.1);
+	            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+	        }
+	
+	        .animated-button::before {
+	            content: '';
+	            position: absolute;
+	            width: 300%;
+	            height: 300%;
+	            background: rgba(255, 255, 255, 0.2);
+	            top: -100%;
+	            left: -100%;
+	            transition: all 0.6s ease;
+	            border-radius: 50%;
+	            z-index: 0;
+	        }
+	
+	        .animated-button:hover::before {
+	            top: 0;
+	            left: 0;
+	        }
+	
+	        .animated-button span {
+	            position: relative;
+	            z-index: 1;
+	        }
+	
+	        /* ===========================
+	           Responsive Adjustments
+	        =========================== */
+	        @media (max-width: 600px) {
+	            .animated-button {
+	                width: 100%;
+	                text-align: center;
+	            }
+	
+	            .animated-section h2 {
+	                font-size: 2em;
+	            }
+	
+	            .animated-section p {
+	                font-size: 1em;
+	            }
+	        }
+	    </style>
+	
+	    <!-- Embedded JavaScript to Trigger Animation on Page Load -->
+	    <script>
+	        document.addEventListener('DOMContentLoaded', () => {
+	            const aboutSection = document.getElementById('about');
+	            // Add the 'visible' class to trigger the fade-in and slide-up animation
+	            setTimeout(() => {
+	                aboutSection.classList.add('visible');
+	            }, 100); // Delay to ensure smooth animation
+	        });
+	    </script>
+	</section>
+
+<!DOCTYPE html>
 <section id=settings style="display:none;">
 			<p>Select your preferred color theme:</p>
             <select id="theme-select">
@@ -891,6 +1457,400 @@
     </html>
 </section>
 
+
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        transition: background-color 0.3s;
+    }
+
+    .light-mode {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    .dark-mode {
+        background-color: #333;
+        color: #f2f2f2;
+    }
+
+    .blue-mode {
+        background-color: #007BFF;
+        color: #fff;
+    }
+
+    .green-mode {
+        background-color: #28A745;
+        color: #fff;
+    }
+
+    h2 {
+        color: #007BFF;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .input-container {
+        margin-bottom: 20px;
+    }
+
+    input {
+        padding: 10px;
+        margin: 5px 0;
+        width: calc(100% - 20px);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+
+    input:focus {
+        border-color: #007BFF;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    #account-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    #account-list li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        transition: background-color 0.3s;
+    }
+
+    #account-list li:hover {
+        background-color: #e9ecef;
+    }
+</style>
+
+        
+    <!-- Embedded JavaScript for interactivity -->
+    <script>
+        /**
+         * ===========================
+         * PROJECT DATA
+         * ===========================
+         * Define your projects here. You can add as many projects as you like.
+         * Each project should have a title, description, filename, and code.
+         * 
+         * To add a new project:
+         * 1. Choose the appropriate array (pythonProjects or htmlProjects).
+         * 2. Add a new object with the required properties.
+         * 
+         * Example:
+         * {
+         *     title: "Your Project Title",
+         *     description: "A brief description of your project.",
+         *     filename: "yourfile.py", // or "yourfile.html"
+         *     code: `// Your code here`
+         * }
+         */
+
+        // Array of Python projects
+        const pythonProjects = [
+            {
+                title: "Python Script for Greetings (BASICS)",
+                description: "This script demonstrates basic Python syntax and operations.",
+                filename: "Greetings.py",
+                code: `# greetings.py
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("World")`
+            },
+            {
+                title: "Data Analysis with Python",
+                description: "A script that performs data analysis using pandas and matplotlib.",
+                filename: "example2.py",
+                code: `# example2.py
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample data
+data = {'Year': [2018, 2019, 2020, 2021],
+        'Sales': [250, 300, 400, 500]}
+
+df = pd.DataFrame(data)
+
+# Plotting
+plt.plot(df['Year'], df['Sales'], marker='o')
+plt.title('Sales Over Years')
+plt.xlabel('Year')
+plt.ylabel('Sales')
+plt.grid(True)
+plt.show()`
+            },
+            // Add more Python projects as needed
+        ];
+
+        // Array of HTML projects
+        const htmlProjects = [
+            {
+                title: "Simple HTML Page",
+                description: "A basic HTML page structure with headings and paragraphs.",
+                filename: "simplepage.html",
+                code: `<!-- simplepage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple HTML Page</title>
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+    <p>This is a simple HTML page.</p>
+</body>
+</html>`
+            },
+            {
+                title: "Responsive Navigation Bar",
+                description: "An HTML project showcasing a responsive navigation bar using CSS.",
+                filename: "example2.html",
+                code: `<!-- example2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Navbar</title>
+    <style>
+        body {font-family: Arial, sans-serif;}
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        @media screen and (max-width: 600px) {
+            .navbar a {
+                float: none;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <h1>Responsive Navigation Bar</h1>
+    <p>Resize the browser window to see the effect.</p>
+</body>
+</html>`
+            },
+            // Add more HTML projects as needed
+        ];
+
+        /**
+         * ===========================
+         * UTILITY FUNCTIONS
+         * ===========================
+         */
+
+        /**
+         * Function to create and insert project cards into the repository section
+         * @param {Array} projects - Array of project objects
+         * @param {String} containerId - ID of the container where projects will be inserted
+         */
+        function loadProjects(projects, containerId) {
+            const container = document.getElementById(containerId);
+            // Clear existing projects to prevent duplication
+            container.innerHTML = '';
+
+            projects.forEach(project => {
+                // Create project card div
+                const card = document.createElement('div');
+                card.className = 'project-card';
+
+                // Project title
+                const title = document.createElement('h3');
+                title.textContent = project.title;
+                card.appendChild(title);
+
+                // Project description
+                const desc = document.createElement('p');
+                desc.textContent = project.description;
+                card.appendChild(desc);
+
+                // Buttons container
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.className = 'buttons';
+
+                // View button
+                const viewBtn = document.createElement('button');
+                viewBtn.className = 'view-btn';
+                viewBtn.textContent = 'View';
+                viewBtn.onclick = () => toggleCode(card);
+                buttonsDiv.appendChild(viewBtn);
+
+                // Download button
+                const downloadBtn = document.createElement('a');
+                downloadBtn.className = 'download-btn';
+                downloadBtn.textContent = 'Download';
+                downloadBtn.href = '#';
+                downloadBtn.onclick = (e) => {
+                    e.preventDefault();
+                    downloadCode(project.filename, project.code);
+                };
+                buttonsDiv.appendChild(downloadBtn);
+
+                card.appendChild(buttonsDiv);
+
+                // Code container
+                const codeContainer = document.createElement('div');
+                codeContainer.className = 'code-container';
+                const pre = document.createElement('pre');
+                pre.textContent = project.code;
+                codeContainer.appendChild(pre);
+                card.appendChild(codeContainer);
+
+                // Append card to container
+                container.appendChild(card);
+            });
+        }
+
+        /**
+         * Function to toggle the visibility of the code section within a project card
+         * @param {HTMLElement} card - The project card element
+         */
+        function toggleCode(card) {
+            const codeContainer = card.querySelector('.code-container');
+            if (codeContainer.style.display === 'block') {
+                codeContainer.style.display = 'none';
+            } else {
+                codeContainer.style.display = 'block';
+            }
+        }
+
+        /**
+         * Function to download code as a file
+         * @param {String} filename - Name of the file to be downloaded
+         * @param {String} code - The code content to be saved in the file
+         */
+        function downloadCode(filename, code) {
+            // Determine MIME type based on file extension
+            let mimeType = 'text/plain';
+            if (filename.endsWith('.py')) {
+                mimeType = 'text/x-python';
+            } else if (filename.endsWith('.html')) {
+                mimeType = 'text/html';
+            }
+
+            const blob = new Blob([code], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        /**
+         * Function to show a specific section and hide others
+         * @param {String} sectionId - ID of the section to display
+         */
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('main section');
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        /**
+         * Function to apply the selected theme
+         * @param {String} theme - The theme class to be applied to the body
+         */
+        function applyTheme(theme) {
+            document.body.className = ''; // Reset existing classes
+            document.body.classList.add(theme);
+        }
+
+        /**
+         * Function to initialize theme based on user selection or default
+         */
+        function initTheme() {
+            const themeSelect = document.getElementById('theme-select');
+            // Check if a theme is saved in localStorage
+            const savedTheme = localStorage.getItem('selectedTheme') || 'light-mode';
+            applyTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Event listener for theme change
+            themeSelect.addEventListener('change', () => {
+                const selectedTheme = themeSelect.value;
+                applyTheme(selectedTheme);
+                localStorage.setItem('selectedTheme', selectedTheme); // Save selection
+            });
+        }
+
+        /**
+         * ===========================
+         * INITIALIZATION
+         * ===========================
+         */
+        // Initialize the website once the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjects(pythonProjects, 'python-projects-container');
+            loadProjects(htmlProjects, 'html-projects-container');
+            initTheme();
+        });
+    </script>
+</body>
+</html>
 
 
 
