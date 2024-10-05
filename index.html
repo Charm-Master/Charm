@@ -350,55 +350,6 @@
     </style>
 </head>
 <body class="light-mode">
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="logo">Charm</div>
-        <ul>
-            <li><a href="#home" onclick="showSection('home')">Home</a></li>
-            <li><a href="#python-repo" onclick="showSection('python-repo')">Python Repository</a></li>
-            <li><a href="#html-repo" onclick="showSection('html-repo')">HTML Repository</a></li>
-            <li><a href="#about" onclick="showSection('about')">About</a></li>
-            <li><a href="#settings" onclick="showSection('settings')">Settings</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-	<!-- Inside your <section id="home"> -->
-	<section id="home">
-    	<h1>Welcome to the Project Repository</h1>
-    	<p>Explore, view, and download a collection of Python and HTML projects with detailed descriptions.</p>
-      <h9>
-      <head>
-      <!-- Font Awesome Icon Library -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <style>
-      .checked {
-        color: orange;
-      }
-      </style>
-      </head>
-      <body>
-	
-	<img src="https://cdn.stocksnap.io/img-thumbs/960w/programming-code_1STVFMTBJY.jpg" alt="Description of the image">
-
-      <h2>Star Rating</h2>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-
-      </body>
-	<p>"The Design Layout, gives a real sense of coding." - AnonymousF</p>
-	<p></p>
-	<p>"Its so easy to understand and use." - AnonymousElite</p>
-	<p></p>
-	<p>"I'm lovin' it." - AnonymousM</p>
-	<p></p>
-	<p>"Too easy" - Anonymous</p>
-      </h9>
-	</section>
 
 
 
@@ -916,6 +867,57 @@
     </style>
 </head>
 <body class="light-mode">
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Charm</div>
+        <ul>
+            <li><a href="#home" onclick="showSection('home')">Home</a></li>
+            <li><a href="#python-repo" onclick="showSection('python-repo')">Python Repository</a></li>
+            <li><a href="#html-repo" onclick="showSection('html-repo')">HTML Repository</a></li>
+            <li><a href="#about" onclick="showSection('about')">About</a></li>
+            <li><a href="#settings" onclick="showSection('settings')">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+	<!-- Inside your <section id="home"> -->
+	<section id="home">
+    	<h1>Welcome to the Project Repository</h1>
+    	<p>Explore, view, and download a collection of Python and HTML projects with detailed descriptions.</p>
+      <h9>
+      <head>
+      <!-- Font Awesome Icon Library -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+      .checked {
+        color: orange;
+      }
+      </style>
+      </head>
+      <body>
+	
+	<img src="https://cdn.stocksnap.io/img-thumbs/960w/programming-code_1STVFMTBJY.jpg" alt="Description of the image">
+
+      <h2>Star Rating</h2>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+
+      </body>
+	<p>"The Design Layout, gives a real sense of coding." - AnonymousF</p>
+	<p></p>
+	<p>"Its so easy to understand and use." - AnonymousElite</p>
+	<p></p>
+	<p>"I'm lovin' it." - AnonymousM</p>
+	<p></p>
+	<p>"Too easy" - Anonymous</p>
+      </h9>
+	</section>
+
+
 
         <!-- Python Repository Section -->
         <section id="python-repo" style="display:none;">
@@ -1079,213 +1081,467 @@
 	    </script>
 	</section>
 
-<section id="settings" style="display:none;">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Management System</title>
-    
     <!-- Firebase SDKs -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-analytics.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification, updateEmail, deleteUser, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, updateDoc, getDoc, deleteDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
+            // Import the Firebase modules
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+            import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDs-JGgBTA3ncI8RdDLvY17P8gO7KbHE-g",
-            authDomain: "officialcharmdata.firebaseapp.com",
-            projectId: "officialcharmdata",
-            storageBucket: "officialcharmdata.appspot.com",
-            messagingSenderId: "978863054747",
-            appId: "1:978863054747:web:6074fcf487cda2fbe50b3e",
-            measurementId: "G-BD9EZRYCGZ"
-        };
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDs-JGgBTA3ncI8RdDLvY17P8gO7KbHE-g",
+                authDomain: "officialcharmdata.firebaseapp.com",
+                projectId: "officialcharmdata",
+                storageBucket: "officialcharmdata.appspot.com",
+                messagingSenderId: "978863054747",
+                appId: "1:978863054747:web:6074fcf487cda2fbe50b3e",
+                measurementId: "G-BD9EZRYCGZ"
+            };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth();
-        const db = getFirestore();
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth();
+            const db = getFirestore();
 
-        let loggedInUser = null;
+            let loggedInUser = null;
+            let currentAccount = null; // Store the current account being managed
 
-        // Update UI based on authentication state
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                loggedInUser = user;
-                document.getElementById('welcomeMessage').innerText = `Welcome, ${user.email}`;
-                document.getElementById('accountSection').style.display = 'block';
-                document.getElementById('loginSection').style.display = 'none';
+            // DOM Elements
+            const loginArea = document.getElementById('loginArea');
+            const userInfo = document.getElementById('userInfo');
+            const adminSection = document.getElementById('adminSection');
+            const loggedInAs = document.getElementById('loggedInAs');
+            const accountList = document.getElementById('accountList');
+            const accountModal = document.getElementById('accountModal');
+            const accountDetails = document.getElementById('accountDetails');
+            const newEmailInput = document.getElementById('newEmailInput');
 
-                // Check if the user is verified
-                if (user.emailVerified) {
-                    document.getElementById('verificationStatus').innerText = "Your email is verified.";
-                } else {
-                    document.getElementById('verificationStatus').innerText = "Your email is not verified.";
-                }
-            } else {
-                loggedInUser = null;
-                document.getElementById('accountSection').style.display = 'none';
-                document.getElementById('loginSection').style.display = 'block';
-            }
-        });
+            // Functions
 
-        // Account creation
-        async function createAccount(username, email, password) {
-            try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-
-                await setDoc(doc(db, 'users', user.uid), {
-                    username: username,
-                    email: email,
-                    banned: false,
-                    verified: false // Initially not verified
-                });
-
-                // Send email verification
-                await sendEmailVerification(user);
-                alert("Account created successfully! A verification email has been sent.");
-            } catch (error) {
-                alert(error.message);
-            }
-        }
-
-        // Login
-        async function login(email, password) {
-            try {
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                loggedInUser = userCredential.user;
-
-                // Check if user is verified
-                if (!userCredential.user.emailVerified) {
-                    alert("Please verify your email before logging in.");
-                    signOut(auth);
-                }
-            } catch (error) {
-                alert(error.message);
-            }
-        }
-
-        // Logout
-        async function logout() {
-            await signOut(auth);
-        }
-
-        // Change email
-        async function changeEmail(newEmail) {
-            try {
-                await updateEmail(auth.currentUser, newEmail);
-                await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-                    email: newEmail
-                });
-                alert("Email changed successfully!");
-            } catch (error) {
-                alert(error.message);
-            }
-        }
-
-        // Delete account
-        async function deleteAccount() {
-            try {
-                await deleteDoc(doc(db, 'users', auth.currentUser.uid));
-                await deleteUser(auth.currentUser);
-                alert("Account deleted successfully!");
-                loggedInUser = null;
-            } catch (error) {
-                alert(error.message);
-            }
-        }
-
-        // Send Verification Email
-        async function resendVerificationEmail() {
-            if (loggedInUser) {
-                await sendEmailVerification(loggedInUser);
-                alert("Verification email resent.");
-            } else {
-                alert("You need to be logged in to resend the verification email.");
-            }
-        }
-
-        // Password Reset
-        async function resetPassword() {
-            const email = prompt("Please enter your email for password reset:");
-            if (email) {
+            // Create Account
+            async function createAccount(username, email, password) {
                 try {
-                    await sendPasswordResetEmail(auth, email);
-                    alert("Password reset email sent. Please check your inbox.");
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    // Add additional user data to Firestore
+                    await addDoc(collection(db, "accounts"), {
+                        uid: user.uid,
+                        username: username,
+                        email: email,
+                        status: 'active',
+                        verified: false,
+                        isAdmin: false // Set to true manually in Firestore for admin users
+                    });
+                    alert('Account created successfully.');
+                    clearCreateAccountForm();
                 } catch (error) {
-                    alert(error.message);
+                    console.error("Error creating account:", error);
+                    alert(`Error creating account: ${error.message}`);
                 }
             }
-        }
 
-        // Ban account
-        async function banAccount(username) {
-            const userSnapshot = await getDocs(query(collection(db, 'users'), where("username", "==", username)));
-            if (!userSnapshot.empty) {
-                const userId = userSnapshot.docs[0].id;
-                await updateDoc(doc(db, 'users', userId), { banned: true });
-                alert(`Account ${username} has been banned.`);
-            } else {
-                alert("User not found.");
+            // Login
+            async function login(email, password) {
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    loggedInUser = userCredential.user;
+                    alert('Logged in successfully.');
+                } catch (error) {
+                    console.error("Error logging in:", error);
+                    alert(`Error logging in: ${error.message}`);
+                }
             }
-        }
 
-        // Unban account
-        async function unbanAccount(username) {
-            const userSnapshot = await getDocs(query(collection(db, 'users'), where("username", "==", username)));
-            if (!userSnapshot.empty) {
-                const userId = userSnapshot.docs[0].id;
-                await updateDoc(doc(db, 'users', userId), { banned: false });
-                alert(`Account ${username} has been unbanned.`);
-            } else {
-                alert("User not found.");
+            // Logout
+            async function logout() {
+                try {
+                    await signOut(auth);
+                    loggedInUser = null;
+                    alert('Logged out successfully.');
+                } catch (error) {
+                    console.error("Error logging out:", error);
+                    alert(`Error logging out: ${error.message}`);
+                }
             }
-        }
+
+            // Update UI based on authentication state
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    loggedInUser = user;
+                    await updateUI();
+                } else {
+                    loggedInUser = null;
+                    await updateUI();
+                }
+            });
+
+            // Update UI Function
+            async function updateUI() {
+                if (loggedInUser) {
+                    loginArea.classList.add('hidden');
+                    userInfo.classList.remove('hidden');
+                    loggedInAs.textContent = `Logged in as: ${loggedInUser.email}`;
+
+                    // Fetch user data from Firestore
+                    const accountsSnapshot = await getDocs(collection(db, "accounts"));
+                    let userData = null;
+                    accountsSnapshot.forEach(doc => {
+                        if (doc.data().uid === loggedInUser.uid) {
+                            userData = doc.data();
+                        }
+                    });
+
+                    if (userData && userData.isAdmin) {
+                        adminSection.classList.remove('hidden');
+                        await updateAccountList();
+                    } else {
+                        adminSection.classList.add('hidden');
+                    }
+                } else {
+                    loginArea.classList.remove('hidden');
+                    userInfo.classList.add('hidden');
+                    adminSection.classList.add('hidden');
+                    accountList.innerHTML = '';
+                }
+            }
+
+            // Update Account List for Admin
+            async function updateAccountList() {
+                accountList.innerHTML = '';
+                const accountsSnapshot = await getDocs(collection(db, "accounts"));
+                accountsSnapshot.forEach(docSnap => {
+                    const account = docSnap.data();
+                    const accountItem = document.createElement('div');
+                    accountItem.classList.add('account-item');
+                    accountItem.innerHTML = `
+                        <span>${account.username} (${account.email}) - Status: ${account.status} - Verified: ${account.verified}</span>
+                        <div>
+                            <button onclick="openAccountModal('${docSnap.id}')">Manage</button>
+                        </div>
+                    `;
+                    accountList.appendChild(accountItem);
+                });
+            }
+
+            // Open Account Modal
+            async function openAccountModal(docId) {
+                try {
+                    const docRef = doc(db, "accounts", docId);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        currentAccount = { id: docId, ...docSnap.data() };
+                        accountDetails.textContent = `Managing: ${currentAccount.username} (${currentAccount.email})`;
+                        newEmailInput.value = ''; // Clear email input
+                        accountModal.style.display = "block";
+                    } else {
+                        alert("No such document!");
+                    }
+                } catch (error) {
+                    console.error("Error opening account modal:", error);
+                    alert(`Error opening account modal: ${error.message}`);
+                }
+            }
+
+            // Change Email
+            async function changeEmail(newEmail) {
+                if (!currentAccount) return;
+                try {
+                    const docRef = doc(db, "accounts", currentAccount.id);
+                    await updateDoc(docRef, {
+                        email: newEmail
+                    });
+                    alert(`Email for ${currentAccount.username} has been changed to ${newEmail}.`);
+                    await updateAccountList();
+                    closeModal();
+                } catch (error) {
+                    console.error("Error changing email:", error);
+                    alert(`Error changing email: ${error.message}`);
+                }
+            }
+
+            // Delete Account
+            async function deleteAccount() {
+                if (!currentAccount) return;
+                try {
+                    const docRef = doc(db, "accounts", currentAccount.id);
+                    await deleteDoc(docRef);
+                    alert(`${currentAccount.username} has been deleted.`);
+                    await updateAccountList();
+                    closeModal();
+                } catch (error) {
+                    console.error("Error deleting account:", error);
+                    alert(`Error deleting account: ${error.message}`);
+                }
+            }
+
+            // Ban Account
+            async function banAccount() {
+                if (!currentAccount) return;
+                try {
+                    const docRef = doc(db, "accounts", currentAccount.id);
+                    await updateDoc(docRef, {
+                        status: 'banned'
+                    });
+                    alert(`${currentAccount.username} has been banned.`);
+                    await updateAccountList();
+                    closeModal();
+                } catch (error) {
+                    console.error("Error banning account:", error);
+                    alert(`Error banning account: ${error.message}`);
+                }
+            }
+
+            // Unban Account
+            async function unbanAccount() {
+                if (!currentAccount) return;
+                try {
+                    const docRef = doc(db, "accounts", currentAccount.id);
+                    await updateDoc(docRef, {
+                        status: 'active'
+                    });
+                    alert(`${currentAccount.username} has been unbanned.`);
+                    await updateAccountList();
+                    closeModal();
+                } catch (error) {
+                    console.error("Error unbanning account:", error);
+                    alert(`Error unbanning account: ${error.message}`);
+                }
+            }
+
+            // Toggle Verification
+            async function toggleVerification() {
+                if (!currentAccount) return;
+                try {
+                    const docRef = doc(db, "accounts", currentAccount.id);
+                    await updateDoc(docRef, {
+                        verified: !currentAccount.verified
+                    });
+                    alert(`${currentAccount.username} verification status changed to ${!currentAccount.verified ? 'verified' : 'not verified'}.`);
+                    await updateAccountList();
+                    closeModal();
+                } catch (error) {
+                    console.error("Error toggling verification:", error);
+                    alert(`Error toggling verification: ${error.message}`);
+                }
+            }
+
+            // Close Modal
+            function closeModal() {
+                accountModal.style.display = "none";
+            }
+
+            // Clear Create Account Form
+            function clearCreateAccountForm() {
+                document.getElementById('createUsernameInput').value = '';
+                document.getElementById('createEmailInput').value = '';
+                document.getElementById('createPasswordInput').value = '';
+            }
+
+            // Event Listeners
+            document.getElementById('createAccountBtn').addEventListener('click', () => {
+                const username = document.getElementById('createUsernameInput').value.trim();
+                const email = document.getElementById('createEmailInput').value.trim();
+                const password = document.getElementById('createPasswordInput').value.trim();
+                if (username && email && password) {
+                    createAccount(username, email, password);
+                } else {
+                    alert('Please fill in all fields to create an account.');
+                }
+            });
+
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                const email = document.getElementById('loginUsernameInput').value.trim();
+                const password = document.getElementById('loginPasswordInput').value.trim();
+                if (email && password) {
+                    login(email, password);
+                } else {
+                    alert('Please enter both email and password to login.');
+                }
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+
+            document.getElementById('changeEmailBtn').addEventListener('click', () => {
+                const newEmail = newEmailInput.value.trim();
+                if (newEmail) {
+                    changeEmail(newEmail);
+                } else {
+                    alert('Please enter a new email.');
+                }
+            });
+
+            document.getElementById('deleteAccountBtn').addEventListener('click', deleteAccount);
+            document.getElementById('banAccountBtn').addEventListener('click', banAccount);
+            document.getElementById('unbanAccountBtn').addEventListener('click', unbanAccount);
+            document.getElementById('toggleVerificationBtn').addEventListener('click', toggleVerification);
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+
+            // Close modal if clicked outside
+            window.addEventListener('click', (event) => {
+                if (event.target == accountModal) {
+                    closeModal();
+                }
+            });
+
     </script>
+    <style>
+        /* Themes */
+        .light-mode {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .blue-mode {
+            background-color: #456;
+            color: #fff;
+        }
+
+        .green-mode {
+            background-color: #678;
+            color: #fff;
+        }
+
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        .account-list {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .account-item:last-child {
+            border-bottom: none;
+        }
+        button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 5px;
+            position: relative;
+        }
+        #closeModal {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <div id="loginSection">
-            <h2>Login</h2>
-            <input type="email" id="loginEmail" placeholder="Email" required>
-            <input type="password" id="loginPassword" placeholder="Password" required>
-            <button onclick="login(document.getElementById('loginEmail').value, document.getElementById('loginPassword').value)">Login</button>
-            <button onclick="resetPassword()">Forgot Password?</button>
-        </div>
 
-        <div id="accountSection" style="display: none;">
-            <h2 id="welcomeMessage"></h2>
-            <p id="verificationStatus"></p>
-            <h3>Account Management</h3>
-            <button onclick="logout()">Logout</button>
-            <button onclick="deleteAccount()">Delete Account</button>
-            <button onclick="changeEmail(prompt('Enter new email:'))">Change Email</button>
-            <button onclick="resendVerificationEmail()">Resend Verification Email</button>
-            <h3>Ban/Unban User</h3>
-            <input type="text" id="banUsername" placeholder="Username to ban">
-            <button onclick="banAccount(document.getElementById('banUsername').value)">Ban User</button>
-            <input type="text" id="unbanUsername" placeholder="Username to unban">
-            <button onclick="unbanAccount(document.getElementById('unbanUsername').value)">Unban User</button>
-        </div>
+<div class="container">
+    <h1>Account Management System</h1>
 
-        <div>
-            <h2>Create Account</h2>
-            <input type="text" id="newUsername" placeholder="Username" required>
-            <input type="email" id="newEmail" placeholder="Email" required>
-            <input type="password" id="newPassword" placeholder="Password" required>
-            <button onclick="createAccount(document.getElementById('newUsername').value, document.getElementById('newEmail').value, document.getElementById('newPassword').value)">Create Account</button>
-        </div>
+    <!-- Login Area -->
+    <div id="loginArea">
+        <h2>Login</h2>
+        <input type="email" id="loginUsernameInput" placeholder="Email" required>
+        <input type="password" id="loginPasswordInput" placeholder="Password" required>
+        <button id="loginBtn">Login</button>
     </div>
+
+    <!-- Account Creation -->
+    <h2>Create Account</h2>
+    <input type="text" id="createUsernameInput" placeholder="Username" required>
+    <input type="email" id="createEmailInput" placeholder="Email" required>
+    <input type="password" id="createPasswordInput" placeholder="Password" required>
+    <button id="createAccountBtn">Create Account</button>
+
+    <!-- Logged In User Info -->
+    <div id="userInfo" class="hidden">
+        <p id="loggedInAs"></p>
+        <button id="logoutBtn">Logout</button>
+    </div>
+
+    <!-- Admin Management Section -->
+    <div id="adminSection" class="hidden">
+        <h2>Admin Actions</h2>
+        <div id="accountList" class="account-list"></div>
+    </div>
+</div>
+
+<!-- Modal for Account Management -->
+<div id="accountModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal">&times;</span>
+        <h2>Account Management</h2>
+        <p id="accountDetails"></p>
+        <input type="email" id="newEmailInput" placeholder="New Email">
+        <button id="changeEmailBtn">Change Email</button>
+        <button id="deleteAccountBtn">Delete Account</button>
+        <button id="banAccountBtn">Ban Account</button>
+        <button id="unbanAccountBtn">Unban Account</button>
+        <button id="toggleVerificationBtn">Toggle Verification</button>
+    </div>
+</div>
+
 </body>
 </html>
-</section>
+
+
+
+
+
 
 <style>
     body {
