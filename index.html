@@ -350,6 +350,55 @@
     </style>
 </head>
 <body class="light-mode">
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Charm</div>
+        <ul>
+            <li><a href="#home" onclick="showSection('home')">Home</a></li>
+            <li><a href="#python-repo" onclick="showSection('python-repo')">Python Repository</a></li>
+            <li><a href="#html-repo" onclick="showSection('html-repo')">HTML Repository</a></li>
+            <li><a href="#about" onclick="showSection('about')">About</a></li>
+            <li><a href="#settings" onclick="showSection('settings')">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+	<!-- Inside your <section id="home"> -->
+	<section id="home">
+    	<h1>Welcome to the Project Repository</h1>
+    	<p>Explore, view, and download a collection of Python and HTML projects with detailed descriptions.</p>
+      <h9>
+      <head>
+      <!-- Font Awesome Icon Library -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+      .checked {
+        color: orange;
+      }
+      </style>
+      </head>
+      <body>
+	
+	<img src="https://cdn.stocksnap.io/img-thumbs/960w/programming-code_1STVFMTBJY.jpg" alt="Description of the image">
+
+      <h2>Star Rating</h2>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+
+      </body>
+	<p>"The Design Layout, gives a real sense of coding." - AnonymousF</p>
+	<p></p>
+	<p>"Its so easy to understand and use." - AnonymousElite</p>
+	<p></p>
+	<p>"I'm lovin' it." - AnonymousM</p>
+	<p></p>
+	<p>"Too easy" - Anonymous</p>
+      </h9>
+	</section>
 
 
 
@@ -1082,316 +1131,15 @@
 	</section>
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Management System</title>
-    <!-- Firebase SDKs -->
-    <script type="module">
-            // Import the Firebase modules
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-            import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
-            // Your web app's Firebase configuration
-            const firebaseConfig = {
-                apiKey: "AIzaSyDs-JGgBTA3ncI8RdDLvY17P8gO7KbHE-g",
-                authDomain: "officialcharmdata.firebaseapp.com",
-                projectId: "officialcharmdata",
-                storageBucket: "officialcharmdata.appspot.com",
-                messagingSenderId: "978863054747",
-                appId: "1:978863054747:web:6074fcf487cda2fbe50b3e",
-                measurementId: "G-BD9EZRYCGZ"
-            };
-
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            const auth = getAuth();
-            const db = getFirestore();
-
-            let loggedInUser = null;
-            let currentAccount = null; // Store the current account being managed
-
-            // DOM Elements
-            const loginArea = document.getElementById('loginArea');
-            const userInfo = document.getElementById('userInfo');
-            const adminSection = document.getElementById('adminSection');
-            const loggedInAs = document.getElementById('loggedInAs');
-            const accountList = document.getElementById('accountList');
-            const accountModal = document.getElementById('accountModal');
-            const accountDetails = document.getElementById('accountDetails');
-            const newEmailInput = document.getElementById('newEmailInput');
-
-            // Functions
-
-            // Create Account
-            async function createAccount(username, email, password) {
-                try {
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    const user = userCredential.user;
-                    // Add additional user data to Firestore
-                    await addDoc(collection(db, "accounts"), {
-                        uid: user.uid,
-                        username: username,
-                        email: email,
-                        status: 'active',
-                        verified: false,
-                        isAdmin: false // Set to true manually in Firestore for admin users
-                    });
-                    alert('Account created successfully.');
-                    clearCreateAccountForm();
-                } catch (error) {
-                    console.error("Error creating account:", error);
-                    alert(`Error creating account: ${error.message}`);
-                }
-            }
-
-            // Login
-            async function login(email, password) {
-                try {
-                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                    loggedInUser = userCredential.user;
-                    alert('Logged in successfully.');
-                } catch (error) {
-                    console.error("Error logging in:", error);
-                    alert(`Error logging in: ${error.message}`);
-                }
-            }
-
-            // Logout
-            async function logout() {
-                try {
-                    await signOut(auth);
-                    loggedInUser = null;
-                    alert('Logged out successfully.');
-                } catch (error) {
-                    console.error("Error logging out:", error);
-                    alert(`Error logging out: ${error.message}`);
-                }
-            }
-
-            // Update UI based on authentication state
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    loggedInUser = user;
-                    await updateUI();
-                } else {
-                    loggedInUser = null;
-                    await updateUI();
-                }
-            });
-
-            // Update UI Function
-            async function updateUI() {
-                if (loggedInUser) {
-                    loginArea.classList.add('hidden');
-                    userInfo.classList.remove('hidden');
-                    loggedInAs.textContent = `Logged in as: ${loggedInUser.email}`;
-
-                    // Fetch user data from Firestore
-                    const accountsSnapshot = await getDocs(collection(db, "accounts"));
-                    let userData = null;
-                    accountsSnapshot.forEach(doc => {
-                        if (doc.data().uid === loggedInUser.uid) {
-                            userData = doc.data();
-                        }
-                    });
-
-                    if (userData && userData.isAdmin) {
-                        adminSection.classList.remove('hidden');
-                        await updateAccountList();
-                    } else {
-                        adminSection.classList.add('hidden');
-                    }
-                } else {
-                    loginArea.classList.remove('hidden');
-                    userInfo.classList.add('hidden');
-                    adminSection.classList.add('hidden');
-                    accountList.innerHTML = '';
-                }
-            }
-
-            // Update Account List for Admin
-            async function updateAccountList() {
-                accountList.innerHTML = '';
-                const accountsSnapshot = await getDocs(collection(db, "accounts"));
-                accountsSnapshot.forEach(docSnap => {
-                    const account = docSnap.data();
-                    const accountItem = document.createElement('div');
-                    accountItem.classList.add('account-item');
-                    accountItem.innerHTML = `
-                        <span>${account.username} (${account.email}) - Status: ${account.status} - Verified: ${account.verified}</span>
-                        <div>
-                            <button onclick="openAccountModal('${docSnap.id}')">Manage</button>
-                        </div>
-                    `;
-                    accountList.appendChild(accountItem);
-                });
-            }
-
-            // Open Account Modal
-            async function openAccountModal(docId) {
-                try {
-                    const docRef = doc(db, "accounts", docId);
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.exists()) {
-                        currentAccount = { id: docId, ...docSnap.data() };
-                        accountDetails.textContent = `Managing: ${currentAccount.username} (${currentAccount.email})`;
-                        newEmailInput.value = ''; // Clear email input
-                        accountModal.style.display = "block";
-                    } else {
-                        alert("No such document!");
-                    }
-                } catch (error) {
-                    console.error("Error opening account modal:", error);
-                    alert(`Error opening account modal: ${error.message}`);
-                }
-            }
-
-            // Change Email
-            async function changeEmail(newEmail) {
-                if (!currentAccount) return;
-                try {
-                    const docRef = doc(db, "accounts", currentAccount.id);
-                    await updateDoc(docRef, {
-                        email: newEmail
-                    });
-                    alert(`Email for ${currentAccount.username} has been changed to ${newEmail}.`);
-                    await updateAccountList();
-                    closeModal();
-                } catch (error) {
-                    console.error("Error changing email:", error);
-                    alert(`Error changing email: ${error.message}`);
-                }
-            }
-
-            // Delete Account
-            async function deleteAccount() {
-                if (!currentAccount) return;
-                try {
-                    const docRef = doc(db, "accounts", currentAccount.id);
-                    await deleteDoc(docRef);
-                    alert(`${currentAccount.username} has been deleted.`);
-                    await updateAccountList();
-                    closeModal();
-                } catch (error) {
-                    console.error("Error deleting account:", error);
-                    alert(`Error deleting account: ${error.message}`);
-                }
-            }
-
-            // Ban Account
-            async function banAccount() {
-                if (!currentAccount) return;
-                try {
-                    const docRef = doc(db, "accounts", currentAccount.id);
-                    await updateDoc(docRef, {
-                        status: 'banned'
-                    });
-                    alert(`${currentAccount.username} has been banned.`);
-                    await updateAccountList();
-                    closeModal();
-                } catch (error) {
-                    console.error("Error banning account:", error);
-                    alert(`Error banning account: ${error.message}`);
-                }
-            }
-
-            // Unban Account
-            async function unbanAccount() {
-                if (!currentAccount) return;
-                try {
-                    const docRef = doc(db, "accounts", currentAccount.id);
-                    await updateDoc(docRef, {
-                        status: 'active'
-                    });
-                    alert(`${currentAccount.username} has been unbanned.`);
-                    await updateAccountList();
-                    closeModal();
-                } catch (error) {
-                    console.error("Error unbanning account:", error);
-                    alert(`Error unbanning account: ${error.message}`);
-                }
-            }
-
-            // Toggle Verification
-            async function toggleVerification() {
-                if (!currentAccount) return;
-                try {
-                    const docRef = doc(db, "accounts", currentAccount.id);
-                    await updateDoc(docRef, {
-                        verified: !currentAccount.verified
-                    });
-                    alert(`${currentAccount.username} verification status changed to ${!currentAccount.verified ? 'verified' : 'not verified'}.`);
-                    await updateAccountList();
-                    closeModal();
-                } catch (error) {
-                    console.error("Error toggling verification:", error);
-                    alert(`Error toggling verification: ${error.message}`);
-                }
-            }
-
-            // Close Modal
-            function closeModal() {
-                accountModal.style.display = "none";
-            }
-
-            // Clear Create Account Form
-            function clearCreateAccountForm() {
-                document.getElementById('createUsernameInput').value = '';
-                document.getElementById('createEmailInput').value = '';
-                document.getElementById('createPasswordInput').value = '';
-            }
-
-            // Event Listeners
-            document.getElementById('createAccountBtn').addEventListener('click', () => {
-                const username = document.getElementById('createUsernameInput').value.trim();
-                const email = document.getElementById('createEmailInput').value.trim();
-                const password = document.getElementById('createPasswordInput').value.trim();
-                if (username && email && password) {
-                    createAccount(username, email, password);
-                } else {
-                    alert('Please fill in all fields to create an account.');
-                }
-            });
-
-            document.getElementById('loginBtn').addEventListener('click', () => {
-                const email = document.getElementById('loginUsernameInput').value.trim();
-                const password = document.getElementById('loginPasswordInput').value.trim();
-                if (email && password) {
-                    login(email, password);
-                } else {
-                    alert('Please enter both email and password to login.');
-                }
-            });
-
-            document.getElementById('logoutBtn').addEventListener('click', logout);
-
-            document.getElementById('changeEmailBtn').addEventListener('click', () => {
-                const newEmail = newEmailInput.value.trim();
-                if (newEmail) {
-                    changeEmail(newEmail);
-                } else {
-                    alert('Please enter a new email.');
-                }
-            });
-
-            document.getElementById('deleteAccountBtn').addEventListener('click', deleteAccount);
-            document.getElementById('banAccountBtn').addEventListener('click', banAccount);
-            document.getElementById('unbanAccountBtn').addEventListener('click', unbanAccount);
-            document.getElementById('toggleVerificationBtn').addEventListener('click', toggleVerification);
-            document.getElementById('closeModal').addEventListener('click', closeModal);
-
-            // Close modal if clicked outside
-            window.addEventListener('click', (event) => {
-                if (event.target == accountModal) {
-                    closeModal();
-                }
-            });
-
-    </script>
-    <style>
+<section id=settings style="display:none;">
+			<p>Select your preferred color theme:</p>
+            <select id="theme-select">
+                <option value="light-mode">Light</option>
+                <option value="dark-mode">Dark</option>
+                <option value="blue-mode">Blue</option>
+                <option value="green-mode">Green</option>
+            </select>
+		<style>
         /* Themes */
         .light-mode {
             background-color: #f0f0f0;
@@ -1408,137 +1156,306 @@
             color: #fff;
         }
 
-        .green-mode {
+        . green-mode {
             background-color: #678;
             color: #fff;
         }
-
-        /* Basic styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            text-align: center;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .hidden {
-            display: none;
-        }
-        .account-list {
-            margin-top: 20px;
-            border-top: 1px solid #ccc;
-            padding-top: 10px;
-        }
-        .account-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #ccc;
-        }
-        .account-item:last-child {
-            border-bottom: none;
-        }
-        button {
-            margin-left: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        /* Modal styling */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            border-radius: 5px;
-            position: relative;
-        }
-        #closeModal {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-        }
     </style>
-</head>
-<body>
 
-<div class="container">
-    <h1>Account Management System</h1>
 
-    <!-- Login Area -->
-    <div id="loginArea">
-        <h2>Login</h2>
-        <input type="email" id="loginUsernameInput" placeholder="Email" required>
-        <input type="password" id="loginPasswordInput" placeholder="Password" required>
-        <button id="loginBtn">Login</button>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Account Management System</title>
+        <style>
+            /* Basic styling */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f4f4f4;
+            }
+            h1 {
+                text-align: center;
+            }
+            .container {
+                max-width: 600px;
+                margin: auto;
+                background: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .hidden {
+                display: none;
+            }
+            .account-list {
+                margin-top: 20px;
+                border-top: 1px solid #ccc;
+                padding-top: 10px;
+            }
+            .account-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid #ccc;
+            }
+            .account-item:last-child {
+                border-bottom: none;
+            }
+            button {
+                margin-left: 5px;
+            }
+            /* Modal styling */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+                padding-top: 60px;
+            }
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+        </style>
+    </head>
+    <body>
+
+    <div class="container">
+        <h1>Account Management System</h1>
+
+        <!-- Login Area -->
+        <div id="loginArea">
+            <h2>Login</h2>
+            <input type="text" id="loginUsernameInput" placeholder="Username" required>
+            <input type="password" id="loginPasswordInput" placeholder="Password" required>
+            <button id="loginBtn">Login</button>
+        </div>
+
+        <!-- Account Creation -->
+        <h2>Create Account</h2>
+        <input type="text" id="createUsernameInput" placeholder="Username" required>
+        <input type="email" id="createEmailInput" placeholder="Email" required>
+        <input type="password" id="createPasswordInput" placeholder="Password" required>
+        <button id="createAccountBtn">Create Account</button>
+
+        <!-- Logged In User Info -->
+        <div id="userInfo" class="hidden">
+            <p id="loggedInAs"></p>
+            <button id="logoutBtn">Logout</button>
+        </div>
+
+        <!-- Admin Management Section -->
+        <div id="adminSection" class="hidden">
+            <h2>Admin Actions</h2>
+            <div id="accountList" class="account-list"></div>
+        </div>
     </div>
 
-    <!-- Account Creation -->
-    <h2>Create Account</h2>
-    <input type="text" id="createUsernameInput" placeholder="Username" required>
-    <input type="email" id="createEmailInput" placeholder="Email" required>
-    <input type="password" id="createPasswordInput" placeholder="Password" required>
-    <button id="createAccountBtn">Create Account</button>
-
-    <!-- Logged In User Info -->
-    <div id="userInfo" class="hidden">
-        <p id="loggedInAs"></p>
-        <button id="logoutBtn">Logout</button>
+    <!-- Modal for Account Management -->
+    <div id="accountModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" style="cursor:pointer; float:right;">&times;</span>
+            <h2>Account Management</h2>
+            <p id="accountDetails"></p>
+            <input type="text" id="newEmailInput" placeholder="New Email">
+            <button id="changeEmailBtn">Change Email</button>
+            <button id="deleteAccountBtn">Delete Account</button>
+            <button id="banAccountBtn">Ban Account</button>
+            <button id="unbanAccountBtn">Unban Account</button>
+            <button id="toggleVerificationBtn">Toggle Verification</button>
+        </div>
     </div>
 
-    <!-- Admin Management Section -->
-    <div id="adminSection" class="hidden">
-        <h2>Admin Actions</h2>
-        <div id="accountList" class="account-list"></div>
-    </div>
-</div>
+    <script>
+    let loggedInUser = null;
+    let currentAccount = null; // Store the current account being managed
 
-<!-- Modal for Account Management -->
-<div id="accountModal" class="modal">
-    <div class="modal-content">
-        <span id="closeModal">&times;</span>
-        <h2>Account Management</h2>
-        <p id="accountDetails"></p>
-        <input type="email" id="newEmailInput" placeholder="New Email">
-        <button id="changeEmailBtn">Change Email</button>
-        <button id="deleteAccountBtn">Delete Account</button>
-        <button id="banAccountBtn">Ban Account</button>
-        <button id="unbanAccountBtn">Unban Account</button>
-        <button id="toggleVerificationBtn">Toggle Verification</button>
-    </div>
-</div>
+    // Functions
+    function createAccount(username, email, password) {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        if (accounts.find(acc => acc.username === username)) {
+            alert('Username already exists.');
+            return;
+        }
+        accounts.push({ username, email, password, status: 'active', verified: false });
+        localStorage.setItem('accounts', JSON.stringify(accounts));
+        alert('Account created successfully.');
+        updateAccountList();  // Update the account list after creating a new account
+    }
 
-</body>
-</html>
+    function login(username, password) {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        const user = accounts.find(acc => acc.username === username && acc.password === password);
+        if (user) {
+            loggedInUser = user;
+            updateUI();
+            alert('Logged in successfully.');
+        } else {
+            alert('Invalid username or password.');
+        }
+    }
 
+    function logout() {
+        loggedInUser = null;
+        updateUI();
+    }
 
+    function updateAccountList() {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        const accountList = document.getElementById('accountList');
+        accountList.innerHTML = '';
+
+        accounts.forEach(account => {
+            const accountItem = document.createElement('div');
+            accountItem.classList.add('account-item');
+            accountItem.innerHTML = ` 
+                <span>${account.username} (${account.email}) - Status: ${account.status} - Verified: ${account.verified}</span>
+                <div>
+                    <button onclick="openAccountModal('${account.username}')">Manage</button>
+                </div>
+            `;
+            accountList.appendChild(accountItem);
+        });
+    }
+
+    // Open modal for account management
+    function openAccountModal(username) {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        currentAccount = accounts.find(acc => acc.username === username);
+        document.getElementById('accountDetails').textContent = `Managing: ${currentAccount.username} (${currentAccount.email})`;
+        document.getElementById('newEmailInput').value = ''; // Clear email input
+        document.getElementById('accountModal').style.display = "block";
+    }
+
+    // Account management functions
+    function changeEmail(newEmail) {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        const account = accounts.find(acc => acc.username === currentAccount.username);
+        if (account) {
+            account.email = newEmail;
+            alert(`Email for ${account.username} has been changed to ${newEmail}.`);
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+            updateAccountList();
+        }
+    }
+
+    function deleteAccount() {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        const filteredAccounts = accounts.filter(acc => acc.username !== currentAccount.username);
+        localStorage.setItem('accounts', JSON.stringify(filteredAccounts));
+        alert(`${currentAccount.username} has been deleted.`);
+        updateAccountList();
+        closeModal(); // Close the modal after deletion
+    }
+
+    function banAccount(username) {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        const account = accounts.find(acc => acc.username === username);
+        if (account) {
+            account.status = 'banned';
+            alert(`${username} has been banned.`);
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+            updateAccountList();
+            closeModal();
+        }
+    }
+
+    function unbanAccount(username) {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        const account = accounts.find(acc => acc.username === username);
+        if (account) {
+            account.status = 'active';
+            alert(`${username} has been unbanned.`);
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+            updateAccountList();
+            closeModal();
+        }
+    }
+
+    function toggleVerification(username) {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        const account = accounts.find(acc => acc.username === username);
+        if (account) {
+            account.verified = !account.verified;
+            alert(`${username} verification status changed to ${account.verified ? 'verified' : 'not verified'}.`);
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+            updateAccountList();
+            closeModal();
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('accountModal').style.display = "none";
+    }
+
+    // Update UI based on login status
+    function updateUI() {
+        const loginArea = document.getElementById('loginArea');
+        const userInfo = document.getElementById('userInfo');
+        const loggedInAs = document.getElementById('loggedInAs');
+        const adminSection = document.getElementById('adminSection');
+
+        if (loggedInUser) {
+            loginArea.classList.add('hidden');
+            userInfo.classList.remove('hidden');
+            loggedInAs.textContent = `Logged in as: ${loggedInUser.username}`;
+            userInfo.classList.remove('hidden');
+            if (loggedInUser.username === 'admin') {
+                adminSection.classList.remove('hidden');
+                updateAccountList();  // Update the account list for admin view
+            } else {
+                adminSection.classList.add('hidden');
+            }
+        } else {
+            loginArea.classList.remove('hidden');
+            userInfo.classList.add('hidden');
+            adminSection.classList.add('hidden');
+        }
+    }
+
+    // Event Listeners
+    document.getElementById('createAccountBtn').addEventListener('click', () => {
+        const username = document.getElementById('createUsernameInput').value;
+        const email = document.getElementById('createEmailInput').value;
+        const password = document.getElementById('createPasswordInput').value;
+        createAccount(username, email, password);
+    });
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+        const username = document.getElementById('loginUsernameInput').value;
+        const password = document.getElementById('loginPasswordInput').value;
+        login(username, password);
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+    document.getElementById('changeEmailBtn').addEventListener('click', () => {
+        const newEmail = document.getElementById('newEmailInput').value;
+        changeEmail(newEmail);
+    });
+
+    document.getElementById('deleteAccountBtn').addEventListener('click', deleteAccount);
+    document.getElementById('banAccountBtn').addEventListener('click', () => banAccount(currentAccount.username));
+    document.getElementById('unbanAccountBtn').addEventListener('click', () => unbanAccount(currentAccount.username));
+    document.getElementById('toggleVerificationBtn').addEventListener('click', () => toggleVerification(currentAccount.username));
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    </script>
+
+    </body>
+    </html>
+</section>
 
 
 
@@ -1674,157 +1591,6 @@ def greet(name):
 
 greet("World")`
             },
-	    {
-                title: "Frequency Analysis Decipherer",
-                description: "Using caesar cipher, takes cipher code and aligns the most common letter of the cipher with the 10 most commonly used letters of the alphabet by shifting the whole string that position of characters to try and automatically detect the plain text without having to manually shift by each amount. BY MALACHI",
-                filename: "FAD.py",
-                code: # FAD.py
-#Takes the cipher code and shifts the position of the string so that the most common letter in the cipher aligns with the 10 most commonly used letters used
-ciphText = (str(input("Enter the cipher text: "))).upper() #Takes the cipher
-ciphLength = len(ciphText) #Finds the length of cipher 
-position = 0 #Sets initial position of character in cipher to first
-frequencies = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-shifts = [0,0,0,0,0,0,0,0,0,0]
-puncFreq = 0
-while position != ciphLength: #Continues until no more positions left       
-    if ciphText[position] == " " or ciphText[position] == "!" or ciphText[position] == "." or ciphText[position] == "?":
-        puncFreq = puncFreq + 1
-    else:
-        charASCII = ord("A") #Sets initial ASCII value to that of 'A'
-        arrInd = 0 #Sets position in 'frequencies' list to first
-        check = True #Starts loop
-        while check == True: #While loop allowed to run
-            if ord(ciphText[position]) == charASCII: #If the letter matches the value of the one that is being checked for
-                frequencies[arrInd] = frequencies[arrInd] + 1 #Increase the frequency of that letter's position in the list by one
-                check = False #And stop the loop
-            else:
-                charASCII = charASCII + 1 #Change the letter
-                arrInd = arrInd + 1#And its corresponding place in the list
-    
-    position = position + 1
-charASCII = ord("A") #Sets initial ASCII value to that of 'A'
-arrInd = 0
-findHigh = True
-while findHigh == True:
-    if frequencies[arrInd] == max(frequencies):
-        freqChar = charASCII
-        findHigh = False
-    else:
-        charASCII = charASCII + 1
-        arrInd = arrInd + 1
-
-valCom = [69,84,65,79,73,78,83,82,72,76] #E,T,A,O,I,N,S,R,H,L
-count = 0
-pos = 0 
-while count != len(valCom):
-    shifts[pos] = valCom[pos] - freqChar 
-    count = count + 1
-    pos = pos + 1
-
-countSH = 0
-posSH = 0
-
-while countSH != len(shifts):
-    position = 0
-    convString = " "
-    while position != ciphLength:
-            if ciphText[position] == " " or ciphText[position] == "!" or ciphText[position] == "." or ciphText[position] == "?" or ciphText[position] == ",":
-                convNum = ord(ciphText[position])
-            else:
-                charNum = ord(ciphText[position])
-                convNum = int((charNum + shifts[posSH]))
-                if convNum < 65:
-                    convNum = 91-(65-convNum)
-                elif convNum > 90:
-                    convNum = (((convNum - 90)- 1) + 65)
-            convChar = chr(convNum)
-            convString = convString + convChar
-            position = position + 1
-    print(convString)
-    print(" ")
-    countSH = countSH + 1
-    posSH = posSH + 1
-            },
-	    {
-                title: "Binomial Expansion",
-                description: "This program uses further mathematical theory involving the Pascal's triangle to automatically expand the input of an exponential binomial. Will the print the output. BY MALACHI",
-                filename: "Binomial_Expansion.py",
-                code: # Binomial_Expansion.py
-pt0 = [1]
-pt1 = [1,1]
-pt2 = [1,2,1]
-pt3 = [1,3,3,1]
-pt4 = [1,4,6,4,1]
-pt5 = [1,5,10,10,5,1]
-pt6 = [1,6,15,20,15,6,1]
-pt7 = [1,7,21,35,35,21,7,1]
-pt8 = [1,8,28,56,70,56,28,8,1]
-pt9 = [1,9,36,84,126,126,84,36,9,1]
-pt10 = [1,10,45,120,210,252,210,120,45,10,1] #Pascal's triangle
-expFound = False
-print("Enter the first (algebraic) term: ")
-bft = str(input("(")) #Takes first term which is algebraic
-if len(bft) > 1: #If the term is only more than one char long, it has a coefficient and this is separated from the letter for calculations
-    bftL= bft[(len(bft)-1)]
-    bftCE = int(bft.rstrip(bftL))
-    
-else: #If it is one char long, no coefficent -> coefficient assigned to 1 and the letter of the string is just the string
-    bftCE = 1
-    bftL = bft
-
-print("Enter the second (integer) term: ")
-bst = int(input("(" + bft + " + ")) #Takes second term
-print("Enter the power: ")
-pow = int(input("(" + bft + " + " + str(bst) + ")^")) #Takes the power
-userInput = ("(" + bft + " + " + str(bst) + ")^" + str(pow)) #Saves the whole input as a string for the answer line
-expression = ""
-if pow == 0: #Anything to the power of 0 is 1
-    aCE = pt0
-    expression = str(1)
-    expFound = True #Prevents the calculation while loop from starting
-elif pow == 1: #If the power is 1, the answer will just be the expression inside the brackets
-    aCE = pt1
-    expression = (str(bft) + " + " + str(bst)) 
-    expFound = True
-elif pow == 2: 
-    aCE = pt2
-elif pow == 3:
-    aCE = pt3
-elif pow == 4:
-    aCE = pt4
-elif pow == 5:
-    aCE = pt5
-elif pow == 6:
-    aCE = pt6
-elif pow == 7:
-    aCE = pt7
-elif pow == 8:
-    aCE = pt8
-elif pow == 9:
-    aCE = pt9
-else:
-    aCE = pt10 #Assigns all the power inputs up to 10 to the corresponding row on Pascal's triangle
-
-termsComp = 0
-powIU = pow
-pos = 0
-while termsComp != len(aCE) and expFound == False:
-    if termsComp == (len(aCE) - 1):
-        term = str(bst ** pow)
-    elif termsComp == (len(aCE) - 2):
-        termCal = str(aCE[pos] * (bftCE ** powIU) * (bst ** (pow - powIU)))
-        term = termCal + bftL + " + "
-    elif termsComp == 0 and bftCE == 1:
-        term = bftL + "^" + str(powIU) + " + "        
-    else:
-        termCal = str(aCE[pos] * (bftCE ** powIU) * (bst ** (pow - powIU)))
-        term = termCal + bftL + "^" + str(powIU) + " + "
-    expression = expression + term
-    pos = pos + 1
-    powIU = powIU - 1
-    termsComp = termsComp + 1
-print(userInput + "= " + str(expression.rstrip('x^0')))
-	    },
             {
                 title: "Data Analysis with Python",
                 description: "A script that performs data analysis using pandas and matplotlib.",
