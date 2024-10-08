@@ -18,11 +18,11 @@ body {
 
 /* Home Section Styles */
 .home-section {
-    background-color: #ffffff; /* White background for sections */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    padding: 40px; /* Padding for space */
-    margin-bottom: 40px; /* Space between sections */
+    /* background-color: #ffffff; */
+    /* border-radius: 10px; */
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
+    padding: 40px;
+    margin-bottom: 40px;
 }
 
 /* Image Styles */
