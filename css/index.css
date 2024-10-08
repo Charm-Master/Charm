@@ -91,3 +91,10 @@ body {
     justify-content: center; /* Center align buttons */
     margin-top: 20px; /* Space above the button group */
 }
+
+section {
+    display: flex;
+    flex-direction: column;
+    /* align-content: space-around; */
+    align-items: center;
+}
