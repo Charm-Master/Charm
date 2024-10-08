@@ -4,19 +4,21 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4; /* Light grey background for contrast */
     color: #333; /* Dark text for readability */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
 }
 
 /* Container */
 .container {
     max-width: 800px; /* Center and constrain width */
     margin: 0 auto; /* Center container */
-    padding: 20px;
-    text-align: center; /* Center text */
+    padding: 20px; /* Add padding */
+    text-align: center; /* Center text for better readability */
 }
 
 /* Home Section Styles */
 .home-section {
-    background-color: #fff; /* White background for sections */
+    background-color: #ffffff; /* White background for sections */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
     padding: 40px; /* Padding for space */
@@ -58,12 +60,14 @@ body {
 /* Button Styles */
 .animated-button,
 .secondary-button {
+    display: inline-block; /* Make buttons inline */
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 5px;
     color: white;
     text-decoration: none;
     transition: background-color 0.3s, transform 0.3s;
+    margin: 5px; /* Space between buttons */
 }
 
 .animated-button {
@@ -80,10 +84,18 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Lift shadow effect */
 }
 
+/* Discord Section Styles */
+.discord-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align buttons */
+    margin-top: 20px; /* Space above the button group */
+}
+
 /* Responsive Styles */
 @media (max-width: 600px) {
     .star-rating {
         flex-direction: column; /* Stack stars on small screens */
-        align-items: center;
+        align-items: center; /* Center align stars */
     }
 }
