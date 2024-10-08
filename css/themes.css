@@ -1,0 +1,38 @@
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #333333;
+    --nav-background: #35424a;
+    --nav-text-color: #ffffff;
+    --button-background: #35424a;
+    --button-text-color: #ffffff;
+    --download-background: #e8491d;
+    --card-background: #ffffff;
+    --card-text-color: #333333;
+}
+
+/* Dark Theme */
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #f4f4f4;
+    --nav-background: #1f1f1f;
+    --card-background: #1e1e1e;
+    --card-text-color: #f4f4f4;
+}
+
+/* Blue Theme */
+body.blue-mode {
+    --background-color: #e3f2fd;
+    --text-color: #0d47a1;
+    --nav-background: #1565c0;
+    --card-background: #ffffff;
+    --card-text-color: #0d47a1;
+}
+
+/* Green Theme */
+body.green-mode {
+    --background-color: #e8f5e9;
+    --text-color: #1b5e20;
+    --nav-background: #388e3c;
+    --card-background: #ffffff;
+    --card-text-color: #1b5e20;
+}
