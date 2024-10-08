@@ -1,17 +1,25 @@
-/* General Container Styles */
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Light grey background for contrast */
+    color: #333; /* Dark text for readability */
+}
+
+/* Container */
 .container {
-    max-width: 900px; /* Wider container for larger screens */
-    margin: 0 auto; /* Center align */
+    max-width: 800px; /* Center and constrain width */
+    margin: 0 auto; /* Center container */
     padding: 20px;
-    text-align: center; /* Center text for better readability */
+    text-align: center; /* Center text */
 }
 
 /* Home Section Styles */
 .home-section {
-    background-color: #f9f9f9; /* Light background for contrast */
-    padding: 40px 20px;
+    background-color: #fff; /* White background for sections */
     border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    padding: 40px; /* Padding for space */
     margin-bottom: 40px; /* Space between sections */
 }
 
@@ -21,20 +29,20 @@
 }
 
 .repository-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow around image */
 }
 
 /* Star Rating */
 .star-rating {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center align stars */
     margin: 10px 0;
 }
 
-/* Testimonials Styles */
+/* Testimonials */
 .testimonials {
     margin: 20px 0;
 }
@@ -45,18 +53,6 @@
     margin: 15px 0;
     font-style: italic; /* Italics for quotes */
     color: #555; /* Darker text for contrast */
-}
-
-/* Discord Section Styles */
-.discord-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center align buttons */
-    margin-top: 20px;
-}
-
-.discord-buttons .secondary-button {
-    margin: 5px; /* Space between buttons */
 }
 
 /* Button Styles */
