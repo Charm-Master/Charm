@@ -10,7 +10,7 @@ body {
 
 /* Container */
 .container {
-    max-width: 800px; /* Center and constrain width */
+    max-width: 900px; /* Center and constrain width */
     margin: 0 auto; /* Center container */
     padding: 20px; /* Add padding */
     text-align: center; /* Center text for better readability */
