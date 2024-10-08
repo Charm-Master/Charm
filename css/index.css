@@ -1,0 +1,40 @@
+/* Container for Sections */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center; /* Center text for better readability */
+}
+
+/* Image Styles */
+.image-container {
+    margin: 20px 0;
+}
+
+.repository-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Star Rating */
+.star-rating {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+/* Testimonials */
+.testimonials {
+    margin: 20px 0;
+    font-style: italic; /* Italicize testimonial text */
+}
+
+/* Section Heading Styles */
+h1, h2 {
+    margin: 20px 0 10px;
+}
+
+h3 {
+    margin: 20px 0 10px;
+}

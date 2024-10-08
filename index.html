@@ -7,6 +7,7 @@
     <title>Charm</title>
     <!-- Font Awesome Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/index.css">
     <!-- External CSS for better organization (optional) -->
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <!-- Embedded CSS for styling -->
@@ -563,90 +564,87 @@
     </nav>
 
     <!-- Main Content -->
-    <main>
-        <!-- Inside your <section id="home"> -->
-        <section id="home">
+<main>
+    <!-- Home Section -->
+    <section id="home" class="home-section">
+        <div class="container">
             <h1>Welcome to the Project Repository</h1>
             <p>Explore, view, and download a collection of Python and HTML projects with detailed descriptions.</p>
 
-            <img src="https://cdn.stocksnap.io/img-thumbs/960w/programming-code_1STVFMTBJY.jpg"
-                alt="Description of the image">
+            <div class="image-container">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/programming-code_1STVFMTBJY.jpg"
+                     alt="Description of the image" class="repository-image">
+            </div>
 
             <h2>Star Rating</h2>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-
-            <p>"The Design Layout, gives a real sense of coding." - AnonymousF</p>
-            
-            <p>"Its so easy to understand and use." - AnonymousElite</p>
-            
-            <p>"I'm lovin' it." - AnonymousM</p>
-            
-            <p>"Too easy" - Anonymous</p>
-            
-        </section>
-
-
-
-        <!-- Python Repository Section -->
-        <section id="python-repo" style="display:none;">
-            <h2>Python Project Repository</h2>
-            <div class="projects" id="python-projects-container">
-                <!-- Python project cards will be inserted here by JavaScript -->
+            <div class="star-rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
             </div>
-        </section>
 
-        <!-- HTML Repository Section -->
-        <section id="html-repo" style="display:none;">
-            <h2>HTML Project Repository</h2>
-            <div class="projects" id="html-projects-container">
-                <!-- HTML project cards will be inserted here by JavaScript -->
+            <div class="testimonials">
+                <p>"The Design Layout gives a real sense of coding." - <strong>AnonymousF</strong></p>
+                <p>"It's so easy to understand and use." - <strong>AnonymousElite</strong></p>
+                <p>"I'm lovin' it." - <strong>AnonymousM</strong></p>
+                <p>"Too easy." - <strong>Anonymous</strong></p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- About Section with Animated Background -->
-        <section id="about" class="animated-section">
-            <div class="content">
-                <h2>About This Project</h2>
-                <p>
-                    This project is designed to help users manage their coding projects efficiently. It includes a
-                    variety of
-                    Python and HTML projects that cater to different skill levels, providing hands-on experience and
-                    practical
-                    knowledge.
-                </p>
-                <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank"
-                    aria-label="Join our Discord community">
-                    <span>Join Our Discord</span>
+    <!-- Python Repository Section -->
+    <section id="python-repo" style="display:none;">
+        <h2>Python Project Repository</h2>
+        <div class="projects" id="python-projects-container">
+            <!-- Python project cards will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- HTML Repository Section -->
+    <section id="html-repo" style="display:none;">
+        <h2>HTML Project Repository</h2>
+        <div class="projects" id="html-projects-container">
+            <!-- HTML project cards will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section with Animated Background -->
+    <section id="about" class="animated-section">
+        <div class="content">
+            <h2>About This Project</h2>
+            <p>This project is designed to help users manage their coding projects efficiently. It includes a variety of Python and HTML projects that cater to different skill levels, providing hands-on experience and practical knowledge.</p>
+            <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank" aria-label="Join our Discord community">
+                <span>Join Our Discord</span>
+            </a>
+
+            <!-- New Discord Section -->
+            <h3 class="discord-title">Discord</h3>
+            <div class="discord-buttons">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdr_-aNF7l9xW7kNui5M24fQKN6AxIcs8anF15p3bRgK3sS9w/viewform?usp=sf_link"
+                   class="secondary-button" target="_blank" aria-label="Apply for any role">
+                    <span>Apply for Any Role</span>
                 </a>
-
-                <!-- New Discord Section -->
-                <h3 class="discord-title">Discord</h3>
-                <div class="discord-buttons">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdr_-aNF7l9xW7kNui5M24fQKN6AxIcs8anF15p3bRgK3sS9w/viewform?usp=sf_link"
-                        class="secondary-button" target="_blank" aria-label="Apply for any role">
-                        <span>Apply for Any Role</span>
-                    </a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdtlTdQb3K8R5Rpbz7lFJaZ51134JzhCCnKn3HaUIYUtOHqBQ/viewform?usp=sf_link"
-                        class="secondary-button" target="_blank" aria-label="Customer Feedback">
-                        <span>Customer Feedback</span>
-                    </a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSecQgL1FFz6PFAKyrYyiGaDc4c4Yxn4d2d8WdOGyICA_XnxTA/viewform?usp=sf_link"
-                        class="secondary-button" target="_blank" aria-label="Unban Inquiries">
-                        <span>Unban Inquiries</span>
-                    </a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvVghjsg6BB8B_xAFOiF0NQs2iVmoeTIUfInvKIaxgl58mvQ/viewform?usp=sf_link"
-                        class="secondary-button" target="_blank" aria-label="Report">
-                        <span>Report</span>
-                    </a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrcj4figzQgevdP3sHTffilpFGlwq1PNePti6bx3wqNJ0hEA/viewform?usp=sf_link"
-                        class="secondary-button" target="_blank" aria-label="Reset Charm Password">
-                        <span>Reset Charm Password</span>
-                    </a>
-                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdtlTdQb3K8R5Rpbz7lFJaZ51134JzhCCnKn3HaUIYUtOHqBQ/viewform?usp=sf_link"
+                   class="secondary-button" target="_blank" aria-label="Customer Feedback">
+                    <span>Customer Feedback</span>
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSecQgL1FFz6PFAKyrYyiGaDc4c4Yxn4d2d8WdOGyICA_XnxTA/viewform?usp=sf_link"
+                   class="secondary-button" target="_blank" aria-label="Unban Inquiries">
+                    <span>Unban Inquiries</span>
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvVghjsg6BB8B_xAFOiF0NQs2iVmoeTIUfInvKIaxgl58mvQ/viewform?usp=sf_link"
+                   class="secondary-button" target="_blank" aria-label="Report">
+                    <span>Report</span>
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrcj4figzQgevdP3sHTffilpFGlwq1PNePti6bx3wqNJ0hEA/viewform?usp=sf_link"
+                   class="secondary-button" target="_blank" aria-label="Reset Charm Password">
+                    <span>Reset Charm Password</span>
+                </a>
             </div>
-        </section>
+        </div>
+    </section>
+</main>
+
 </body>
