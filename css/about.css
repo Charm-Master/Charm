@@ -1,0 +1,139 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    /* Light grey background */
+    margin: 0;
+    /* Remove default margin */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: var(--nav-background);
+    padding: 5px 14px;
+}
+
+.container {
+    max-width: 1200px;
+    /* Max width for the container */
+    margin: 0 auto;
+    /* Center container */
+    display: flex;
+    justify-content: space-between;
+    /* Space between logo and links */
+    align-items: center;
+    /* Align items vertically */
+}
+
+.logo a {
+    color: white;
+    /* Logo text color */
+    font-size: 24px;
+    /* Logo font size */
+    text-decoration: none;
+    /* Remove underline */
+}
+
+.nav-links {
+    list-style: none;
+    /* Remove list style */
+    display: flex;
+    /* Flex layout for navigation links */
+    gap: 20px;
+    /* Space between links */
+}
+
+.nav-links a {
+    color: white;
+    /* Link text color */
+    text-decoration: none;
+    /* Remove underline */
+    font-size: 16px;
+    /* Font size for links */
+}
+
+.discord-button {
+    background-color: #28A745;
+    /* Discord button color */
+    padding: 10px 20px;
+    /* Button padding */
+    border-radius: 5px;
+    /* Rounded corners */
+    transition: background-color 0.3s;
+    /* Transition effect */
+}
+
+.discord-button:hover {
+    background-color: #218838;
+    /* Darker shade on hover */
+}
+
+.content {
+    padding: 20px;
+    /* background-color: white; */
+    border-radius: 10px;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    /* align-content: space-around; */
+    align-items: center;
+    text-align: center;
+}
+
+h2 {
+    color: #007BFF;
+    /* Primary color for headings */
+}
+
+h3.discord-title {
+    margin-top: 20px;
+    /* Margin above discord title */
+}
+
+/* Button Styles */
+.animated-button,
+.secondary-button {
+    display: inline-block;
+    /* Inline-block for buttons */
+    padding: 10px 20px;
+    /* Padding for buttons */
+    font-size: 16px;
+    /* Font size for buttons */
+    color: white;
+    /* Button text color */
+    text-decoration: none;
+    /* Remove underline */
+    border-radius: 5px;
+    /* Rounded corners */
+    transition: background-color 0.3s;
+    /* Transition effect */
+    margin: 5px;
+    /* Margin between buttons */
+}
+
+.animated-button {
+    background-color: #007BFF;
+    /* Primary button color */
+}
+
+.secondary-button {
+    background-color: #28A745;
+    /* Secondary button color */
+}
+
+.animated-button:hover,
+.secondary-button:hover {
+    opacity: 0.8;
+    /* Slight opacity on hover */
+}
+
+.discord-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: space-between;
+    align-items: center;
+}
