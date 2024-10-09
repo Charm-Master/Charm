@@ -1,0 +1,77 @@
+/* Projects Page */
+.projects {
+    padding: 3rem 2rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+}
+
+.projects h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.project-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.project {
+    background-color: var(--card-background);
+    color: var(--card-text-color);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 60%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    text-align: left;
+}
+
+.project h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.project p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.project .links {
+    margin-top: 1rem;
+}
+
+.project .links a {
+    text-decoration: none;
+    color: var(--download-background);
+    padding: 8px 16px;
+    margin-right: 10px;
+    background-color: var(--button-background);
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.project .links a:hover {
+    background-color: var(--download-hover-background);
+    color: var(--button-text-color);
+}
+
+.project:hover {
+    transform: translateY(-10px);
+}
+
+/* Responsive Design for Projects */
+@media (max-width: 768px) {
+    .project {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .project {
+        width: 95%;
+    }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Projects - Charm</title>
+    <link rel="stylesheet" href="css/py-projects.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="light-mode">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo"><a href="#">Charm</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="#">Projects</a>
+                <div class="dropdown-content">
+                    <a href="py-projects.html">Python Projects</a>
+                    <a href="js-projects.html">Other Projects</a>
+                </div>
+            </li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Signup</a></li>
+        </ul>
+        <div class="theme-switcher">
+            <select id="themeSelect" onchange="changeTheme()">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Python Projects Content -->
+    <section class="projects">
+        <h1>Python Projects</h1>
+
+        <div class="project-details">
+            <div class="project">
+                <h2>1. Web Scraper</h2>
+                <p>This project is a Python web scraper that extracts data from websites using libraries such as BeautifulSoup and Requests. The code allows users to fetch and parse web pages for targeted information.</p>
+                <div class="links">
+                    <a href="https://github.com/your-repo/web-scraper" target="_blank">GitHub Repository</a>
+                    <a href="https://example.com/web-scraper-tutorial" target="_blank">Project Documentation</a>
+                </div>
+            </div>
+
+            <div class="project">
+                <h2>2. To-Do List Manager</h2>
+                <p>This is a simple To-Do List manager built using Python and Tkinter for the GUI. The project allows users to add, edit, and delete tasks in a user-friendly interface.</p>
+                <div class="links">
+                    <a href="https://github.com/your-repo/todo-list" target="_blank">GitHub Repository</a>
+                    <a href="https://example.com/todo-manager-guide" target="_blank">Project Documentation</a>
+                </div>
+            </div>
+
+            <div class="project">
+                <h2>3. Data Analysis with Pandas</h2>
+                <p>A data analysis project using Pandas and Matplotlib to visualize and analyze datasets. This project is useful for beginners in data science looking to explore Python's data manipulation capabilities.</p>
+                <div class="links">
+                    <a href="https://github.com/your-repo/data-analysis" target="_blank">GitHub Repository</a>
+                    <a href="https://example.com/data-analysis-tutorial" target="_blank">Project Documentation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Charm. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

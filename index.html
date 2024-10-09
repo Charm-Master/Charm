@@ -1,643 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charm</title>
-    <!-- Font Awesome Icon Library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/themes.css">
-    <!-- External CSS for better organization (optional) -->
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-    <!-- Embedded CSS for styling -->
-    <style>
-        /* ===========================
-           RESET & BOX-SIZING
-        =========================== */
-        /* Reset some default styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .checked {
-            color: orange;
-        }
-
-        h1 {
-            font-size: 3em;
-        }
-
-        p {
-            margin-top: 5px;
-        }
-
-        /* ===========================
-           THEME STYLES USING CSS VARIABLES
-        =========================== */
-        :root {
-            /* Light Theme Variables */
-            --background-color: #f4f4f4;
-            --text-color: #333333;
-            --nav-background: #35424a;
-            --nav-text-color: #ffffff;
-            --button-background: #35424a;
-            --button-text-color: #ffffff;
-            --button-hover-background: #1f2a30;
-            --download-background: #e8491d;
-            --download-hover-background: #cf3e13;
-            --code-background: #2d2d2d;
-            --code-text-color: #cccccc;
-            --card-background: #ffffff;
-            --card-text-color: #333333;
-        }
-
-        /* Dark Theme */
-        body.dark-mode {
-            --background-color: #121212;
-            --text-color: #f4f4f4;
-            --nav-background: #1f1f1f;
-            --nav-text-color: #ffffff;
-            --button-background: #444444;
-            --button-text-color: #ffffff;
-            --button-hover-background: #555555;
-            --download-background: #e8491d;
-            --download-hover-background: #cf3e13;
-            --code-background: #1e1e1e;
-            --code-text-color: #f4f4f4;
-            --card-background: #1e1e1e;
-            --card-text-color: #f4f4f4;
-        }
-
-        /* Blue Theme */
-        body.blue-mode {
-            --background-color: #e3f2fd;
-            --text-color: #0d47a1;
-            --nav-background: #1565c0;
-            --nav-text-color: #ffffff;
-            --button-background: #1976d2;
-            --button-text-color: #ffffff;
-            --button-hover-background: #0d47a1;
-            --download-background: #1e88e5;
-            --download-hover-background: #1565c0;
-            --code-background: #bbdefb;
-            --code-text-color: #0d47a1;
-            --card-background: #ffffff;
-            --card-text-color: #0d47a1;
-        }
-
-        /* Green Theme */
-        body.green-mode {
-            --background-color: #e8f5e9;
-            --text-color: #1b5e20;
-            --nav-background: #388e3c;
-            --nav-text-color: #ffffff;
-            --button-background: #43a047;
-            --button-text-color: #ffffff;
-            --button-hover-background: #2e7d32;
-            --download-background: #66bb6a;
-            --download-hover-background: #388e3c;
-            --code-background: #c8e6c9;
-            --code-text-color: #1b5e20;
-            --card-background: #ffffff;
-            --card-text-color: #1b5e20;
-        }
-
-        /* ===========================
-           BASE STYLES
-        =========================== */
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            font-family: Arial, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* ===========================
-           NAVIGATION BAR STYLES
-        =========================== */
-        nav {
-            background-color: var(--nav-background);
-            color: var(--nav-text-color);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-        }
-
-        nav ul li a {
-            color: var(--nav-text-color);
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--download-background);
-        }
-
-        /* ===========================
-           MAIN CONTENT STYLES
-        =========================== */
-        main {
-            padding: 20px;
-        }
-
-        /* Section styling */
-        section {
-            padding: 60px 0;
-        }
-
-        /* Home section */
-        #home {
-            text-align: center;
-        }
-
-        #home img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 20px;
-            border-radius: 10px;
-        }
-
-        /* Repository sections */
-        #repository .projects {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        /* Project card styling */
-        .project-card {
-            background-color: var(--card-background);
-            color: var(--card-text-color);
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            width: 300px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .project-card h3 {
-            margin-bottom: 10px;
-            color: var(--card-text-color);
-        }
-
-        .project-card p {
-            margin-bottom: 15px;
-            color: var(--card-text-color);
-            flex-grow: 1;
-            /* Ensures buttons stay at the bottom */
-        }
-
-        .project-card .buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .project-card button,
-        .project-card a.download-btn {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            color: var(--button-text-color);
-        }
-
-        .project-card button.view-btn {
-            background-color: var(--button-background);
-            color: var(--button-text-color);
-        }
-
-        .project-card button.view-btn:hover {
-            background-color: var(--button-hover-background);
-        }
-
-        .project-card a.download-btn {
-            background-color: var(--download-background);
-            color: var(--button-text-color);
-        }
-
-        .project-card a.download-btn:hover {
-            background-color: var(--download-hover-background);
-        }
-
-        /* Code container styling */
-        .code-container {
-            display: none;
-            background-color: var(--code-background);
-            color: var(--code-text-color);
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin-top: 15px;
-        }
-
-        .code-container pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* About section */
-        #about {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        /* Settings section */
-        #settings {
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        /* Toggle Switch Styling */
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-            margin-top: 20px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: 0.4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: 0.4s;
-            border-radius: 50%;
-        }
-
-        input:checked+.slider {
-            background-color: #e8491d;
-        }
-
-        input:checked+.slider:before {
-            transform: translateX(26px);
-        }
-
-        /* Footer styling */
-        footer {
-            background-color: var(--nav-background);
-            color: var(--nav-text-color);
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-
-
-        /* ===========================
-           RESPONSIVE DESIGN
-        =========================== */
-        @media (max-width: 768px) {
-            .project-card {
-                width: 45%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .project-card {
-                width: 100%;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 10px 0;
-            }
-        }
-
-        /* ===========================
-           Animated Section Styles
-        =========================== */
-        .animated-section {
-            position: relative;
-            overflow: hidden;
-            padding: 60px 20px;
-            text-align: center;
-            /* opacity: 0; */
-            transform: translateY(20px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        /* Visible state triggers fade-in and slide-up */
-        .animated-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Keyframes for Gradient Animation */
-        @keyframes gradientBG {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        /* Content Container Styling */
-        .animated-section .content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            /* Semi-transparent background */
-            border-radius: 8px;
-        }
-
-        /* Heading Styling */
-        .animated-section h2 {
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-
-        /* New Discord Title Styling */
-        .discord-title {
-            margin-top: 40px;
-            margin-bottom: 20px;
-            font-size: 2em;
-            color: #ffffff;
-        }
-
-        /* Paragraph Styling */
-        .animated-section p {
-            line-height: 1.6;
-            font-size: 1.2em;
-        }
-
-        /* ===========================
-           Animated Button Styles
-        =========================== */
-        .animated-button,
-        .secondary-button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 20px;
-            color: white;
-            background: linear-gradient(45deg, #ff6ec4, #7873f5);
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            margin: 10px 5px;
-        }
-
-        /* Secondary Buttons Styling */
-        .secondary-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 40px;
-            background: linear-gradient(45deg, #a0c4ff, #cdb4db);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            margin: 10px 10px;
-        }
-
-        .secondary-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .secondary-button::before {
-            content: '';
-            position: absolute;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.2);
-            top: -100%;
-            left: -100%;
-            transition: all 0.6s ease;
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .secondary-button:hover::before {
-            top: 0;
-            left: 0;
-        }
-
-        .secondary-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .animated-button:hover,
-        .secondary-button:hover {
-            transform: scale(1.05);
-        }
-
-        /* Focus Styles for Accessibility */
-        .animated-button:focus,
-        .secondary-button:focus {
-            outline: 2px solid #fff;
-            outline-offset: 4px;
-        }
-
-        /* ===========================
-           Responsive Adjustments
-        =========================== */
-        @media (max-width: 600px) {
-
-            .animated-button,
-            .secondary-button {
-                width: 100%;
-                text-align: center;
-                margin: 10px 0;
-            }
-
-            .animated-section h2 {
-                font-size: 2em;
-            }
-
-            .discord-title {
-                font-size: 1.8em;
-            }
-
-            .animated-section p {
-                font-size: 1em;
-            }
-        }
-
-        /* ===========================
-           Reduced Motion for Accessibility
-        =========================== */
-        @media (prefers-reduced-motion: reduce) {
-            .animated-section {
-                animation: none;
-            }
-
-            .animated-button,
-            .secondary-button {
-                transition: none;
-            }
-
-            .animated-button::before,
-            .secondary-button::before {
-                display: none;
-            }
-        }
-    </style>
-
 </head>
-
-
 <body class="light-mode">
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="logo">Charm</div>
-        <ul>
-            <li><a href="#home" onclick="showSection('home')">Home</a></li>
-            <li><a href="#python-repo" onclick="showSection('python-repo')">Python Repository</a></li>
-            <li><a href="#html-repo" onclick="showSection('html-repo')">HTML Repository</a></li>
-            <li><a href="#about" onclick="showSection('about')">About</a></li>
-            <li><a href="#settings" onclick="showSection('settings')">Settings</a></li>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo"><a href="#">Charm</a></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li class="dropdown">
+                <a href="#">Projects</a>
+                <div class="dropdown-content">
+                    <a href="#">Project 1</a>
+                    <a href="#">Project 2</a>
+                </div>
+            </li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Signup</a></li>
         </ul>
+        <div class="theme-switcher">
+            <select id="themeSelect" onchange="changeTheme()">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
+        </div>
     </nav>
 
     <!-- Main Content -->
-    <main>
-        <!-- Home Section -->
-        <section id="home" class="home-section">
-            <div class="container">
-                <h1 class="main-title">Welcome to the Project Repository</h1>
-                <p class="intro-text">Explore, view, and download a collection of Python and HTML projects with detailed
-                    descriptions.</p>
+    <section class="main-content">
+        <div class="centered-content">
+            <h1>Charm</h1>
+            <button class="join-button">Join Now</button>
+        </div>
+    </section>
 
-                <div class="image-container">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/programming-code_1STVFMTBJY.jpg"
-                        alt="Programming Code" class="repository-image">
-                </div>
-
+    <!-- Projects Section -->
+    <section class="projects">
+        <h2>Projects</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Project 1</h3>
+                <p>Project description goes here.</p>
             </div>
-        </section>
-
-        <!-- Python Repository Section -->
-        <section id="python-repo" style="display:none;">
-            <h2 class="repo-title">Python Project Repository</h2>
-            <div class="projects" id="python-projects-container">
-                <!-- Python project cards will be inserted here by JavaScript -->
+            <div class="card">
+                <h3>Project 2</h3>
+                <p>Project description goes here.</p>
             </div>
-        </section>
-
-        <!-- HTML Repository Section -->
-        <section id="html-repo" style="display:none;">
-            <h2 class="repo-title">HTML Project Repository</h2>
-            <div class="projects" id="html-projects-container">
-                <!-- HTML project cards will be inserted here by JavaScript -->
+            <div class="card">
+                <h3>Project 3</h3>
+                <p>Project description goes here.</p>
             </div>
-        </section>
-
-        <!-- About Section with Animated Background -->
-        <section id="about" class="animated-section">
-            <div class="content">
-                <h2>About This Project</h2>
-                <p>This project is designed to help users manage their coding projects efficiently. It includes a
-                    variety of Python and HTML projects that cater to different skill levels, providing hands-on
-                    experience and practical knowledge.</p>
-                <a href="https://discord.gg/nTrz6pt7xe" class="animated-button" target="_blank"
-                    aria-label="Join our Discord community">
-                    <span>Join Our Discord</span>
-                </a>
+            <div class="card">
+                <h3>Project 4</h3>
+                <p>Project description goes here.</p>
             </div>
-        </section>
-        <section>
+        </div>
+    </section>
 
-            <h3 class="testimonials-title">Testimonials</h3>
-            <div class="testimonials">
-                <blockquote>
-                    <p>"The Design Layout gives a real sense of coding." - <strong>AnonymousF</strong></p>
-                </blockquote>
-                <blockquote>
-                    <p>"It's so easy to understand and use." - <strong>AnonymousElite</strong></p>
-                </blockquote>
-                <blockquote>
-                    <p>"I'm lovin' it." - <strong>AnonymousM</strong></p>
-                </blockquote>
-                <blockquote>
-                    <p>"Too easy." - <strong>Anonymous</strong></p>
-                </blockquote>
-            </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Charm. All Rights Reserved.</p>
+    </footer>
 
-            <h2 class="star-rating-title">Star Rating</h2>
-            <div class="star-rating">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-            </div>
-        </section>
-    </main>
-
-
-
-
+    <script src="js/main.js"></script>
 </body>
+</html>

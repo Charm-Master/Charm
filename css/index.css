@@ -1,100 +1,289 @@
-/* General Styles */
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4; /* Light grey background for contrast */
-    color: #333; /* Dark text for readability */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.5s, color 0.5s;
 }
 
-/* Container */
-.container {
-    max-width: 900px; /* Center and constrain width */
-    margin: 0 auto; /* Center container */
-    padding: 20px; /* Add padding */
-    text-align: center; /* Center text for better readability */
-}
-
-/* Home Section Styles */
-.home-section {
-    /* background-color: #ffffff; */
-    /* border-radius: 10px; */
-    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
-    padding: 40px;
-    margin-bottom: 40px;
-}
-
-/* Image Styles */
-.image-container {
-    margin: 20px 0;
-}
-
-.repository-image {
-    max-width: 100%; /* Responsive image */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow around image */
-}
-
-/* Star Rating */
-.star-rating {
+/* Navbar Styling */
+.navbar {
     display: flex;
-    justify-content: center; /* Center align stars */
-    margin: 10px 0;
-}
-
-/* Testimonials */
-.testimonials {
-    margin: 20px 0;
-}
-
-.testimonials blockquote {
-    border-left: 4px solid #007BFF; /* Accent border */
-    padding-left: 15px;
-    margin: 15px 0;
-    font-style: italic; /* Italics for quotes */
-    color: #555; /* Darker text for contrast */
-}
-
-/* Button Styles */
-.animated-button,
-.secondary-button {
-    display: inline-block; /* Make buttons inline */
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.3s;
-    margin: 5px; /* Space between buttons */
-}
-
-.animated-button {
-    background-color: #007BFF; /* Primary color for the main button */
-}
-
-.secondary-button {
-    background-color: #28A745; /* Secondary color for other actions */
-}
-
-.animated-button:hover,
-.secondary-button:hover {
-    transform: translateY(-2px); /* Slight lift effect */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Lift shadow effect */
-}
-
-/* Discord Section Styles */
-.discord-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center align buttons */
-    margin-top: 20px; /* Space above the button group */
-}
-
-section {
-    display: flex;
-    flex-direction: column;
-    /* align-content: space-around; */
+    justify-content: space-between;
     align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--nav-background);
+    color: var(--nav-text-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    font-size: 1.8rem;
+    color: var(--nav-text-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--nav-text-color);
+    padding: 8px 16px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+.nav-links li a:hover {
+    background-color: var(--button-hover-background);
+    color: var(--button-text-color);
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: var(--nav-background);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 10px;
+    color: var(--nav-text-color);
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--button-hover-background);
+    color: var(--button-text-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.theme-switcher {
+    padding: 8px 16px;
+}
+
+select {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links li {
+        text-align: left;
+        width: 100%;
+    }
+}
+
+/* ===========================
+       THEME STYLES USING CSS VARIABLES
+   =========================== */
+
+/* Light Theme */
+body.light-mode {
+    --background-color: #f4f4f4;
+    --text-color: #333333;
+    --nav-background: #35424a;
+    --nav-text-color: #ffffff;
+    --button-background: #35424a;
+    --button-text-color: #ffffff;
+    --button-hover-background: #1f2a30;
+    --download-background: #e8491d;
+    --download-hover-background: #cf3e13;
+    --code-background: #2d2d2d;
+    --code-text-color: #cccccc;
+    --card-background: #ffffff;
+    --card-text-color: #333333;
+}
+
+/* Dark Theme */
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #f4f4f4;
+    --nav-background: #1f1f1f;
+    --nav-text-color: #ffffff;
+    --button-background: #444444;
+    --button-text-color: #ffffff;
+    --button-hover-background: #555555;
+    --download-background: #e8491d;
+    --download-hover-background: #cf3e13;
+    --code-background: #1e1e1e;
+    --code-text-color: #f4f4f4;
+    --card-background: #1e1e1e;
+    --card-text-color: #f4f4f4;
+}
+
+/* Blue Theme */
+body.blue-mode {
+    --background-color: #e3f2fd;
+    --text-color: #0d47a1;
+    --nav-background: #1565c0;
+    --nav-text-color: #ffffff;
+    --button-background: #1976d2;
+    --button-text-color: #ffffff;
+    --button-hover-background: #0d47a1;
+    --download-background: #1e88e5;
+    --download-hover-background: #1565c0;
+    --code-background: #bbdefb;
+    --code-text-color: #0d47a1;
+    --card-background: #ffffff;
+    --card-text-color: #0d47a1;
+}
+
+/* Green Theme */
+body.green-mode {
+    --background-color: #e8f5e9;
+    --text-color: #1b5e20;
+    --nav-background: #388e3c;
+    --nav-text-color: #ffffff;
+    --button-background: #43a047;
+    --button-text-color: #ffffff;
+    --button-hover-background: #2e7d32;
+    --download-background: #66bb6a;
+    --download-hover-background: #388e3c;
+    --code-background: #c8e6c9;
+    --code-text-color: #1b5e20;
+    --card-background: #ffffff;
+    --card-text-color: #1b5e20;
+}
+
+/* Main Content */
+.main-content {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.centered-content h1 {
+    font-size: 4rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.join-button {
+    padding: 12px 30px;
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.join-button:hover {
+    background-color: var(--button-hover-background);
+}
+
+/* Projects Section */
+.projects {
+    padding: 3rem 2rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+}
+
+.projects h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--card-background);
+    color: var(--card-text-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 2rem);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* Footer */
+footer {
+    padding: 1.5rem;
+    background-color: var(--nav-background);
+    color: var(--nav-text-color);
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Responsive Cards */
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+    }
 }
